@@ -1,17 +1,6 @@
-- title "Versions"
+- title "Idea: #{@section.idea.name}"
 
-%table
-  %tr
-    %th Section
-    %th Content
-    %th User
-  - for version in @versions
-    %tr
-      %td= version.section_id
-      %td= version.content
-      %td= version.user_id
-      %td= link_to 'Show', version
-      %td= link_to 'Edit', edit_version_path(version)
-      %td= link_to 'Destroy', version, :confirm => 'Are you sure?', :method => :delete
-
-%p= link_to "New Version", new_version_path
+.version.current
+  = render 'sections/section', :locals => {:section => @section}
+  .author
+    = "#{@section.user.email} updated the #{@section.name} on #{@section.updated_at}" 

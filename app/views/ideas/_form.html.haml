@@ -1,6 +1,7 @@
 = semantic_form_for @idea do |f|
   = f.inputs do 
     = f.input :name
+    = f.input :description, :input_html => { :placeholder => "One line quick description.  200 chars max" } 
     = f.input :state_id, :as => :select,   :collection => State.not_internal
 
   = f.buttons

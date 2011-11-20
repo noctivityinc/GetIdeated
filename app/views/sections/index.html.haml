@@ -1,19 +1,7 @@
-- title "Sections"
+- title @idea.name
+- subtitle @idea.description
 
-%table
-  %tr
-    %th Name
-    %th Idea
-    %th Description
-    %th Locked
-  - for section in @sections
-    %tr
-      %td= section.name
-      %td= section.idea_id
-      %td= section.description
-      %td= section.locked
-      %td= link_to 'Show', section
-      %td= link_to 'Edit', edit_section_path(section)
-      %td= link_to 'Destroy', section, :confirm => 'Are you sure?', :method => :delete
-
-%p= link_to "New Section", new_section_path
+#section_list
+  - @sections.each do |section|
+    = render section
+      

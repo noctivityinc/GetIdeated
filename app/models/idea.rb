@@ -3,6 +3,7 @@ class Idea < ActiveRecord::Base
 
   belongs_to :user
   has_many :sections
+  has_many :comments, :as => :commentable 
 
   after_create :create_sections
 

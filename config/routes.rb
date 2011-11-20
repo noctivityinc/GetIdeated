@@ -1,10 +1,13 @@
 Ideation::Application.routes.draw do
 
+  resources :comments
+
   resources :states
 
   resources :ideas do
-    resources :sections do
-      resources :versions
+    resources :sections, :shallow=>true do
+      resources :versions, :shallow=>true
+      resources :comments, :shallow=>true
     end
   end
 

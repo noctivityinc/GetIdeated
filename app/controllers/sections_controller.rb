@@ -28,10 +28,16 @@ class SectionsController < ApplicationController
 
   def update
     @section = Section.find(params[:id])
+    @section.user = current_user
     if @section.update_attributes(params[:section])
-      redirect_to @section, :notice  => "Successfully updated section."
+      flash[:notice] = "#{@section.name} successfully updated" 
     else
-      render :action => 'edit'
+      flash[:error] = "#{@section.name} failed to update" 
+    end
+
+    respond_to do |wants|
+      wants.html {  redirect_to @section }
+      wants.js  { render :json => @section }
     end
   end
 
@@ -45,6 +51,6 @@ class SectionsController < ApplicationController
 
   def get_idea
     @idea = Idea.find_by_id(params[:idea_id])
-    redirect_to root_url, :notice => "Idea could not be found" unless @idea    
+    redirect_to root_url, :notice => "Idea could not be found" unless @idea
   end
 end

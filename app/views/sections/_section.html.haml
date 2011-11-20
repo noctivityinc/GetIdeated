@@ -1,0 +1,17 @@
+- section ||= @section
+
+.section
+  %h3= section.name
+  .controls
+    = link_to "Edit", '#', :class => 'edit' 
+    = link_to "Comments (#{section.comments.count})", '#', :class => 'comments' 
+    = link_to "Versions (#{section.versions.count})", section_versions_path(section)
+  .version
+    = section.content
+  = form_for section, :remote => true  do |f|
+    = f.text_area :content 
+    .minor 
+      = f.check_box :minor
+      Minor Edit.  Don't save version
+    = link_to "Cancel", '#', :class => "cancel"
+    = f.submit "Submit"

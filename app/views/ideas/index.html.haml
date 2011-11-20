@@ -1,8 +1,8 @@
 - title "Ideas"
 
 = table_for @ideas do |t|
-  = t.data :action => :all do
-    = t.cell :name
+  = t.data do
+    = t.cell(:name) {|n| link_to n.name, idea_sections_path(n)}
     = t.cell :state, :heading => "State" 
 
 %p= link_to "New Idea", new_idea_path

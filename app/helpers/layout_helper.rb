@@ -12,6 +12,15 @@ module LayoutHelper
     @show_title
   end
 
+  def subtitle(page_subtitle, show_subtitle = true)
+    content_for(:subtitle) { h(page_subtitle.to_s) }
+    @show_subtitle = show_subtitle
+  end
+
+  def show_subtitle?
+    @show_subtitle
+  end
+
   def stylesheet(*args)
     content_for(:head) { stylesheet_link_tag(*args) }
   end
