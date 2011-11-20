@@ -1,0 +1,21 @@
+- title "Section"
+
+%p
+  %strong Name:
+  = @section.name
+%p
+  %strong Idea:
+  = @section.idea_id
+%p
+  %strong Description:
+  = @section.description
+%p
+  %strong Locked:
+  = @section.locked
+
+%p
+  = link_to "Edit", edit_section_path(@section)
+  |
+  = link_to "Destroy", @section, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", sections_path

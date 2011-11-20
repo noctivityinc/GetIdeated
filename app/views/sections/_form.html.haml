@@ -1,0 +1,20 @@
+= form_for @section do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :idea_id
+    %br
+    = f.number_field :idea_id
+  %p
+    = f.label :description
+    %br
+    = f.text_field :description
+  %p
+    = f.label :locked
+    %br
+    = f.check_box :locked
+  %p
+    = f.submit

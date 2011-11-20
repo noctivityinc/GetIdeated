@@ -1,0 +1,16 @@
+= form_for @version do |f|
+  = f.error_messages
+  %p
+    = f.label :section_id
+    %br
+    = f.number_field :section_id
+  %p
+    = f.label :content
+    %br
+    = f.text_area :content
+  %p
+    = f.label :user_id
+    %br
+    = f.number_field :user_id
+  %p
+    = f.submit

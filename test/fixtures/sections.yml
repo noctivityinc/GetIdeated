@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  idea_id: 1
+  description: MyString
+  locked: false
+
+two:
+  name: MyString
+  idea_id: 1
+  description: MyString
+  locked: false
