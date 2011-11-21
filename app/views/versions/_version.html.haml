@@ -1,0 +1,7 @@
+.version.previous
+  .icon
+    = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
+  .col
+    .name= version.user.name
+    .date= version.updated_at
+    .content= version.content

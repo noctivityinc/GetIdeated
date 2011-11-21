@@ -1,8 +1,16 @@
 class VersionsController < ApplicationController
-  before_filter :get_section
+  before_filter :get_section, :set_breadcrumbs
 
   def index
     @versions = @section.versions.all
+    @versions.shift       # => remove the first one since that's the current version
+
+    respond_to do |wants|
+      wants.html {
+        render @versions if request.xhr?
+      }
+      wants.js  { render :json => @versions }
+    end
   end
 
   def show
@@ -46,5 +54,12 @@ class VersionsController < ApplicationController
   def get_section
     @section = Section.find_by_id(params[:section_id])
     redirect_to root_url, :notice => "Section could not be found" unless @section
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb "Ideas", ideas_path
+    add_breadcrumb @section.idea.name, idea_sections_path(@section.idea)
+    add_breadcrumb @section.name, section_path(@section)
+    add_breadcrumb "Versions", ''
   end
 end

@@ -3,4 +3,8 @@ class Version < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :section
+
+  default_scope order('updated_at DESC')
+
+  scope :ordered, order("updated_at DESC")
 end

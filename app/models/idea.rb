@@ -2,8 +2,8 @@ class Idea < ActiveRecord::Base
   attr_accessible :name, :user_id, :state_id, :description
 
   belongs_to :user
-  has_many :sections
-  has_many :comments, :as => :commentable 
+  has_many :sections, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy 
 
   after_create :create_sections
 

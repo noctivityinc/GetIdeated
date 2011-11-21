@@ -1,6 +1,7 @@
 - title "Idea: #{@section.idea.name}"
 
 .version.current
-  = render 'sections/section', :locals => {:section => @section}
-  .author
-    = "#{@section.user.email} updated the #{@section.name} on #{@section.updated_at}" 
+  = render :partial => @section, :locals => {:show_author => true}
+
+.version_list
+  = render @versions

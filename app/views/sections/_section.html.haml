@@ -1,17 +1,27 @@
-- section ||= @section
+- section ||= @section;  section.minor = false
+- show_author ||= false
+
 
 .section
   %h3= section.name
   .controls
     = link_to "Edit", '#', :class => 'edit' 
-    = link_to "Comments (#{section.comments.count})", '#', :class => 'comments' 
-    = link_to "Versions (#{section.versions.count})", section_versions_path(section)
+    = link_to "Comments (#{section.comments.count})", section
+    = link_to_unless controller.controller_name == 'versions', "Versions (#{section.versions.count})", section_versions_path(section)
   .version
-    = section.content
-  = form_for section, :remote => true  do |f|
-    = f.text_area :content 
+    %div= section.content
+  = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))}  do |f|
+    = f.text_area :content, :maxlength => 1000
     .minor 
       = f.check_box :minor
       Minor Edit.  Don't save version
-    = link_to "Cancel", '#', :class => "cancel"
-    = f.submit "Submit"
+    .chars_left
+      = "#{section.content.blank? ? 1000 : 1000 - section.content.length} characters left"
+    .controls
+      = link_to "Cancel", '#', :class => "cancel"
+      = f.submit "Update the #{section.name}"
+  
+  - if section.user && show_author
+    .author
+      = "#{section.user.name} updated the #{section.name} on #{section.updated_at}" 
+      

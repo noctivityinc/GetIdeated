@@ -1,21 +1,24 @@
-- title "Section"
+- title "Idea: #{@section.idea.name}"
 
-%p
-  %strong Name:
-  = @section.name
-%p
-  %strong Idea:
-  = @section.idea_id
-%p
-  %strong Description:
-  = @section.description
-%p
-  %strong Locked:
-  = @section.locked
+.version.current
+  = render :partial => @section, :locals => {:show_author => true}
 
-%p
-  = link_to "Edit", edit_section_path(@section)
-  |
-  = link_to "Destroy", @section, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", sections_path
+.comments_list
+  = render @comments
+
+.comment_new
+  .comment
+    .icon
+      = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
+    .col
+      %b Leave a comment...
+      .text
+        .header
+          Format text with Textile 
+          = link_to "(help with Textile)", "http://www.textism.com/tools/textile/", :target => "_blank" 
+        = form_for [@section, @comment], :remote => true, :html => {'data-comment-list' => url_for(section_comments_path(@section))}  do |f|
+          = f.text_area :content, :required => true
+          .controls
+            = link_to "Cancel", '#', :class => "cancel"
+            = f.submit "Add this Comment"
+    

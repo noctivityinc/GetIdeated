@@ -3,10 +3,15 @@ class SectionsController < ApplicationController
 
   def index
     @sections = @idea.sections.all
+    @comments = @idea.comments.all
+    @comment = @idea.comments.new
   end
 
   def show
     @section = Section.find(params[:id])
+    @comments = @section.comments.all
+    @comment = @section.comments.new
+    set_breadcrumbs
   end
 
   def new
@@ -36,8 +41,10 @@ class SectionsController < ApplicationController
     end
 
     respond_to do |wants|
-      wants.html {  redirect_to @section }
-      wants.js  { render :json => @section }
+      wants.html {
+        render @section if request.xhr?
+      }
+      wants.js  { render @section }
     end
   end
 
@@ -52,5 +59,11 @@ class SectionsController < ApplicationController
   def get_idea
     @idea = Idea.find_by_id(params[:idea_id])
     redirect_to root_url, :notice => "Idea could not be found" unless @idea
+  end
+
+  def set_breadcrumbs
+    add_breadcrumb "Ideas", ideas_path
+    add_breadcrumb @section.idea.name, idea_sections_path(@section.idea)
+    add_breadcrumb @section.name, section_path(@section)
   end
 end

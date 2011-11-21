@@ -33,7 +33,7 @@ form.formtastic fieldset ol
     border-top: 1px dashed #FFCC66
     border-bottom: 1px dashed #FFCC66
     
-  li.string, li.password 
+  li.string, li.password, li.stringish
     fieldset
       :padding 1.4em
       :margin 0 0 1.5em 0
@@ -42,7 +42,7 @@ form.formtastic fieldset ol
       :font-size 1.2em
     input
       :width 400px
-      &.text, &.title, &[type=text], &[type=password], &.password
+      &.text, &.title, &[type=text], &[type=password], &.password, &[type=email]
         border: 1px solid gray
         :margin 0em 0
         :background-color #fff
@@ -77,3 +77,5 @@ form.formtastic fieldset ol
       color: #666
       margin: 0.5em 0 0 25%
       clear: both
+
+    

@@ -1,0 +1,11 @@
+- comment ||= @comment
+
+.comment
+  .icon
+    = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
+  .col
+    .name= comment.user.name
+    .date= comment.created_at
+    - if comment.user == current_user && comment.created_at + 15.minutes > Time.now 
+      .trash= link_to image_tag('mini_trash.gif', :title => "This comment becomes permenant in #{pluralize(minutes_till_permanent(comment),'minute')}"), comment, :method => :delete, :remote => true, :confirm => "Are you sure you want to delete this comment"  
+    .content= comment.content

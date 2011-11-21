@@ -1,0 +1,66 @@
+#container
+  .section
+    margin-bottom: 15px
+    h3
+      float: left
+      margin: 0px
+      padding: 0px
+      color: gray
+
+    .controls
+      float: right
+      font-size: 10px
+
+    .version, form
+      width: 750px
+      margin: 5px 0px 10px 0px
+      padding: 5px
+      clear: both
+
+    .version
+      div
+        margin-top: 15px
+        min-height: 20px
+        display: block
+        padding: 5px
+        &:hover
+          border: 1px dashed gray
+          background: #FFFFCC
+          cursor: pointer
+
+    form
+      display: none
+      overflow: hidden
+      clear: both
+      
+      textarea
+        clear: both
+        width: 98%
+        height: 50px
+        padding: 5px
+        margin-top: 10px
+
+      .cancel, .minor, .chars_left
+        font-size: 10px
+
+      .minor
+        float: left
+      
+      .chars_left
+        float: right
+
+        &.danger
+          color: red
+
+      .controls
+        display: block
+        clear: both
+        margin-top: 10px
+        float: left
+
+    .author
+      display: block
+      clear: both
+      font-size: 10px
+      margin-top: 15px
+      color: gray

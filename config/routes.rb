@@ -1,14 +1,11 @@
 Ideation::Application.routes.draw do
 
-  resources :comments
-
-  resources :states
-
   resources :ideas do
     resources :sections, :shallow=>true do
-      resources :versions, :shallow=>true
+      resources :versions, :shallow=>true 
       resources :comments, :shallow=>true
     end
+    resources :comments, :shallow=>true
   end
 
   match '/user' => "ideas#index", :as => :user_root

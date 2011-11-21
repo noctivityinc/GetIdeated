@@ -7,4 +7,76 @@
       margin-left: 0px
       margin-right: 10px
 
+  .locked
+    float: right
+    display: inline
 
+  .add_toggle 
+    display: none
+
+  .toggle 
+    background: image-url("toggle.png") bottom left
+    display: block
+    width: 70px
+    height: 22px
+    &.checked 
+      background-position: top left
+
+  .comments
+    margin-top: 60px
+
+  .comment
+    padding: 10px 0px
+    font-size: .95em
+    border-bottom: 1px solid #c0c0c0
+
+    .icon
+      display: inline-block
+      width: 40px
+      vertical-align: top
+
+    .col
+      display: inline-block
+      width: 700px
+      .name, .date, .trash
+        display: inline
+        font-size: 10px
+        color: gray
+      
+      .name
+        font-weight: bold
+
+      .content
+        margin-top: 5px
+
+      .trash
+        img
+          height: 16px
+          vertical-align: bottom
+
+  .comment_new
+    .comment
+      b
+        font-size: 11px
+        color: gray
+      .text
+        margin-top: 10px
+        .header
+          background: #f0f0f0
+          padding: 5px 10px
+          border: 1px solid black
+          border-bottom: none
+          width: 730px
+          font-size: 10px
+            
+        form
+          textarea
+            width: 730px
+            height: 75px
+            margin: 0px
+            padding: 10px
+
+          .controls
+            margin-top: 10px
+            .cancel, .minor
+              font-size: 10px

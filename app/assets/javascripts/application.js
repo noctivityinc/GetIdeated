@@ -9,4 +9,4 @@
 //= require jquery-ui
 //= require_tree .
 
-$.ajaxSettings.dataType = "json";
+$.ajaxSettings.dataType = "html";

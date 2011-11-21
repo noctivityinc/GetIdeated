@@ -4,4 +4,29 @@
 #section_list
   - @sections.each do |section|
     = render section
+
+.comments
+  %h3= "#{pluralize(@comments.count, 'Comment')}"
+
+.comments_list
+  = render @comments
+
+.comment_new
+  .comment
+    .icon
+      = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
+    .col
+      %b Leave a comment...
+      .text
+        .header
+          Format text with Textile 
+          = link_to "(help with Textile)", "http://www.textism.com/tools/textile/", :target => "_blank" 
+        = form_for [@idea, @comment], :remote => true, :html => {'data-comment-list' => url_for(idea_comments_path(@idea))}  do |f|
+          = f.text_area :content, :required => true
+          .controls
+            = link_to "Cancel", '#', :class => "cancel"
+            = f.submit "Add this Comment"
+    
+
+
       
