@@ -1,0 +1,28 @@
+= form_for @invite do |f|
+  = f.error_messages
+  %p
+    = f.label :email
+    %br
+    = f.text_field :email
+  %p
+    = f.label :user_id
+    %br
+    = f.number_field :user_id
+  %p
+    = f.label :idea_id
+    %br
+    = f.number_field :idea_id
+  %p
+    = f.label :can_edit
+    %br
+    = f.check_box :can_edit
+  %p
+    = f.label :token
+    %br
+    = f.text_field :token
+  %p
+    = f.label :expires_at
+    %br
+    = f.datetime_select :expires_at
+  %p
+    = f.submit

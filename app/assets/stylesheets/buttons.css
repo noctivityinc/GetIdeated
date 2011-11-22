@@ -1,7 +1,7 @@
-a.button, li.button input {
+a.button, input[type=submit], li.button input {
     padding: 5px 10px;
     display: inline;
-    background: #777 image-url(button.png) repeat-x bottom;
+    background: #777 url(button.png) repeat-x bottom;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -23,7 +23,7 @@ a.button:active {
     }
 a.button.red { background-color: #e50000; }
 a.button.purple { background-color: #9400bf; }
-a.button.green, li.button input { background-color: #58aa00; }
+a.button.green, input[type=submit], li.button input { background-color: #58aa00; }
 a.button.orange { background-color: #ff9c00; }
 a.button.blue { background-color: #2c6da0; }
 a.button.black { background-color: #333; }
@@ -34,3 +34,22 @@ a.button.small:active { padding: 4px 7px 2px; background-position: 0 top; }
 a.button.large { font-size: 125%; padding: 7px 12px; }
 a.button.large:hover { background-position: 0 -35px; }
 a.button.large:active { padding: 8px 12px 6px; background-position: 0 top; }
+
+.rounded {
+    padding: 5px 10px;
+    display: inline;
+    background: #fff;
+    border: 1px dotted gray;
+    color: gray;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.rounded.red { border: 1px solid #e50000; }
+.rounded.purple { border: 1px solid #9400bf; }
+.rounded.green { border: 1px solid #58aa00; color: #58aa00; }
+.rounded.small { font-size: 75%; padding: 3px 7px; }
+.rounded.large { font-size: 125%; padding: 7px 12px; }
+

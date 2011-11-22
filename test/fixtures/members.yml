@@ -1,0 +1,9 @@
+one:
+  user_id: 1
+  idea_id: 1
+  can_edit: false
+
+two:
+  user_id: 1
+  idea_id: 1
+  can_edit: false

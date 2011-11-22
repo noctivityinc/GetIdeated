@@ -1,0 +1,27 @@
+- title "Invite"
+
+%p
+  %strong Email:
+  = @invite.email
+%p
+  %strong User:
+  = @invite.user_id
+%p
+  %strong Idea:
+  = @invite.idea_id
+%p
+  %strong Can Edit:
+  = @invite.can_edit
+%p
+  %strong Token:
+  = @invite.token
+%p
+  %strong Expires At:
+  = @invite.expires_at
+
+%p
+  = link_to "Edit", edit_invite_path(@invite)
+  |
+  = link_to "Destroy", @invite, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", invites_path

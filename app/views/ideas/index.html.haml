@@ -7,10 +7,10 @@
 - @ideas.each do |idea|
   .idea
     .col.name= link_to idea.name, idea_sections_path(idea)
-    .col.settings= link_to "Settings", edit_idea_path(idea)
-    .col.members= link_to "Members", edit_idea_path(idea)
-    .col.progress{:title => idea.state}
+    .col.settings= link_to "One Page Plan", idea_sections_path(idea), :class => "button small blue" 
+    .col.settings= link_to "Settings", edit_idea_path(idea), :class => "button small" 
+    .col.members= link_to "Members", idea_members_path(idea), :class => "button small"
+    .col.progress{:title => "#{idea.state} - #{get_progress(idea).round}% Complete"}
       %span.meter.candy{:style => "width: #{get_progress(idea)}%"}
-      .text= idea.state
     
 

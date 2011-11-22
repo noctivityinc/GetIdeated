@@ -19,6 +19,6 @@
         = form_for [@section, @comment], :remote => true, :html => {'data-comment-list' => url_for(section_comments_path(@section))}  do |f|
           = f.text_area :content, :required => true
           .controls
-            = link_to "Cancel", '#', :class => "cancel"
+            = link_to "Cancel", '#', :class => "cancel button small"
             = f.submit "Add this Comment"
     

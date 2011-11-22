@@ -1,19 +1,19 @@
 Ideation::Application.routes.draw do
 
+  match '/user' => "ideas#index", :as => :user_root
+  devise_for :users
+
   resources :ideas do
     resources :sections, :shallow=>true do
       resources :versions, :shallow=>true 
       resources :comments, :shallow=>true
     end
     resources :comments, :shallow=>true
+    resources :members, :only => [:index, :destroy], :shallow=>true
+    resources :invites, :only => [:new, :create, :destroy], :shallow=>true
   end
 
-  match '/user' => "ideas#index", :as => :user_root
-
-  devise_for :users
-
   get "home/index"
-
   root :to => "home#index"
 
   # The priority is based upon order of creation:

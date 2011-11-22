@@ -1,0 +1,8 @@
+%h3= "Invite to #{@idea.name}"
+= semantic_form_for [@idea, @invite], :remote => true do |f|
+  = f.inputs do 
+    = f.input :email
+    = f.input :can_edit, :as => :select, :collection => {'Contributor' => true, 'Viewer' => false }, :include_blank => false  
+  = f.buttons do
+    %li.cancel.button= link_to "Cancel", '#', :class => "button small cancel"
+    = f.commit_button 'Invite'

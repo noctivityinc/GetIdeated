@@ -11,10 +11,11 @@ class IdeasController < ApplicationController
 
   def new
     @idea = current_user.ideas.new
+    add_breadcrumb "Ideas", ideas_path
   end
 
   def create
-    @idea = current_user.ideas.new(params[:idea])
+    @idea = current_user.own_ideas.new(params[:idea])
     if @idea.save
       redirect_to idea_sections_path(@idea), :notice => "#{@idea.name} Idea Created."
     else

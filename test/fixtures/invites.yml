@@ -1,0 +1,15 @@
+one:
+  email: MyString
+  user_id: 1
+  idea_id: 1
+  can_edit: false
+  token: MyString
+  expires_at: 2011-11-21 21:30:27
+
+two:
+  email: MyString
+  user_id: 1
+  idea_id: 1
+  can_edit: false
+  token: MyString
+  expires_at: 2011-11-21 21:30:27
