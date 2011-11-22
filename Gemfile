@@ -22,6 +22,7 @@ gem 'formtastic'
 gem 'tabletastic'
 gem 'gravatar_image_tag'
 gem "breadcrumbs_on_rails"
+gem 'postmark-rails'
 
 gem "nifty-generators", :group => :development
 

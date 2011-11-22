@@ -57,4 +57,21 @@ Ideation::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  ActionMailer::Base.default_url_options[:host] = "getideated.com"
+
+  # config.action_mailer.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => 587,
+  #   :domain               => "getideated.com",
+  #   :user_name            => "mailer",
+  #   :password             => "g3t!d3@t3d",
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }
+
+  config.action_mailer.delivery_method   = :postmark
+  config.action_mailer.postmark_settings = { :api_key => "6e524d63-9e3f-4b0a-9bb8-2a9598c0520d" }
+
 end
