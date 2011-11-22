@@ -1,4 +1,14 @@
 $(function() {
+  $('div[title]').qtip({
+    position: {
+      my: 'top center',
+      at: 'bottom center'
+    },
+     style: {
+        classes: 'ui-tooltip-dark ui-tooltip-shadow ui-tooltip-rounded'
+     }
+  })
+
   $('.section .controls .edit, .section .version').live('click', function(e) {
     e.preventDefault();
     

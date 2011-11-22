@@ -29,10 +29,14 @@
         - flash.each do |name, msg|
           = content_tag :div, msg, :id => "flash_#{name}"
 
-      - if show_title?
-        %h1.title= yield(:title)
+      #page_header
+        .titles
+          - if show_title?
+            %h1.title= yield(:title)
 
-      - if show_subtitle?
-        %h2.subtitle= yield(:subtitle)
+          - if show_subtitle?
+            %h2.subtitle= yield(:subtitle)
+        .placeholder
+          = yield(:placeholder)
 
       = yield

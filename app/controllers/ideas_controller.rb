@@ -24,12 +24,13 @@ class IdeasController < ApplicationController
 
   def edit
     @idea = current_user.ideas.find(params[:id])
+    set_breadcrumbs
   end
 
   def update
     @idea = current_user.ideas.find(params[:id])
     if @idea.update_attributes(params[:idea])
-      redirect_to @idea, :notice  => "Successfully updated idea."
+      redirect_to idea_sections_path(@idea), :notice => "#{@idea.name} Idea Updated."
     else
       render :action => 'edit'
     end
@@ -40,4 +41,10 @@ class IdeasController < ApplicationController
     @idea.destroy
     redirect_to ideas_url, :notice => "Successfully destroyed idea."
   end
+
+  def set_breadcrumbs
+    add_breadcrumb "Ideas", ideas_path
+    add_breadcrumb @idea.name, idea_sections_path(@idea)
+  end
+
 end

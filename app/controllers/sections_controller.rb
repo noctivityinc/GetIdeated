@@ -5,6 +5,7 @@ class SectionsController < ApplicationController
     @sections = @idea.sections.all
     @comments = @idea.comments.all
     @comment = @idea.comments.new
+    add_idea_crumbs(@idea)
   end
 
   def show
@@ -61,9 +62,13 @@ class SectionsController < ApplicationController
     redirect_to root_url, :notice => "Idea could not be found" unless @idea
   end
 
-  def set_breadcrumbs
+  def add_idea_crumbs(idea)
     add_breadcrumb "Ideas", ideas_path
-    add_breadcrumb @section.idea.name, idea_sections_path(@section.idea)
+    add_breadcrumb idea.name, idea_sections_path(idea)
+  end
+
+  def set_breadcrumbs
+    add_idea_crumbs(@section.idea)
     add_breadcrumb @section.name, section_path(@section)
   end
 end
