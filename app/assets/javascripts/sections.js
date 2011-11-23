@@ -1,6 +1,6 @@
 $(function() {
-  $('#new_comment').live('ajax:complete', function (evt, res) {
-    
+  $('.section h6').each(function(ndx, el){
+      
   });
 
   $('#new_comment').live('ajax:success', function(evt, data, status, xhr) {

@@ -8,6 +8,8 @@
     = link_to "Edit", '#', :class => 'edit' 
     = link_to "Comments (#{section.comments.count})", section
     = link_to_unless controller.controller_name == 'versions', "Versions (#{section.versions.count})", section_versions_path(section)
+  .clear
+  %h6= section.description
   .version
     %div= section.content
   = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))}  do |f|

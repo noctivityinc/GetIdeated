@@ -2,12 +2,17 @@
   .new_idea
     margin-top: 10px
 
+  .delete_idea
+    margin-top: 10px
+
   .idea
     overflow: hidden
+    min-height: 36px
+    display: block
 
     .col
       float: left
-      margin-right: 15px
+      margin: 5px 15px 5px 0px
 
       &.name
         margin-right: 50px
@@ -16,6 +21,7 @@
         display: none
 
       &.progress
+        margin-top: 0px
         float: right
         width: 150px
         height: 10px  
@@ -89,8 +95,8 @@
           -moz-border-radius-bottomleft: 5px
           border-top-left-radius: 5px
           border-bottom-left-radius: 5px
-          overflow: hidden          
-
+          overflow: hidden        
+          
 
     &:hover
       .col

@@ -3,7 +3,7 @@
 
   %head
     %title
-    = yield(:title) || "Get Ideated.com | Focus. Plan. Dream. Do."
+      = yield(:title) || "Get Ideated.com | Focus. Plan. Dream. Do."
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %link{:href => "images/favicon.gif", :rel => "shortcut icon", :type => "image/gif"}
     = render 'layouts/head'
@@ -19,12 +19,6 @@
         #container
           #header
             = link_to image_tag('logo.png'), root_url
-            
-            - if user_signed_in?
-              #breadcrumbs
-                = render_breadcrumbs
-            - else
-              = render 'layouts/main_navigation'
 
             #user_nav         
               - if user_signed_in?
@@ -32,26 +26,35 @@
                 = link_to current_user.name, edit_user_registration_path(current_user)
                 \. Not you?
                 = link_to "Sign out", destroy_user_session_path, :method => :delete
+              - else
+                = render 'layouts/main_navigation'
+
+            - if user_signed_in?
+              #breadcrumbs.one
+                = render_breadcrumbs
+
 
           #content
-            #flash
+            #flash.one
               - flash.each do |name, msg|
                 = content_tag :div, msg, :id => "flash_#{name}"
 
-            #page_header
+            #page_header.one
               .titles
                 - if show_title?
                   %h1.title= yield(:title)
 
                 - if show_subtitle?
-                  %h2.subtitle= yield(:subtitle)
+                  %h3.subtitle= yield(:subtitle)
               .placeholder
                 = yield(:placeholder)
 
-            = yield
+            .one
+              = yield
 
-            .horizontal-line
-            = render 'layouts/footer'
+            .one.horizontal-line
+            - unless user_signed_in?
+              = render 'layouts/footer'
             = render 'layouts/copyright'
 
       

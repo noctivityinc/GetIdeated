@@ -9,6 +9,7 @@
 //= require jquery-ui
 //= require jquery.qtip.min
 //= require_tree .
+//= require 'theme/custom'
 
 
 $.ajaxSettings.dataType = "html";

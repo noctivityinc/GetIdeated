@@ -2,5 +2,9 @@
 
 = render 'form'
 
-%p
-  = link_to "View All My Ideas", ideas_path
+.one.horizontal-line
+
+.one.delete_idea
+  %h5 Delete Idea
+  %p If you delete an idea all plans, comments and versions will be removed.
+  = link_to "Yes, delete the idea", @idea, :method => :delete, :confirm => "Are you sure?" 

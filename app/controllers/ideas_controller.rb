@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
   def destroy
     @idea = current_user.ideas.find(params[:id])
     @idea.destroy
-    redirect_to ideas_url, :notice => "Successfully destroyed idea."
+    redirect_to ideas_url, :notice => "Successfully destroyed the idea for #{@idea.name}.  So sad.  What's next?"
   end
 
   def set_breadcrumbs

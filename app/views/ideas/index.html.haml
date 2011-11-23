@@ -2,14 +2,14 @@
 
 - content_for :placeholder do
   .new_idea
-    = link_to "+ New Idea", new_idea_path, :class => "button green large" 
+    = link_to "+ New Idea", new_idea_path, :class => "button green big" 
 
 - @ideas.each do |idea|
   .idea
-    .col.name= link_to idea.name, idea_sections_path(idea)
-    .col.settings= link_to "One Page Plan", idea_sections_path(idea), :class => "button small blue" 
-    .col.settings= link_to "Settings", edit_idea_path(idea), :class => "button small" 
-    .col.members= link_to "Members", idea_members_path(idea), :class => "button small"
+    %h5.col.name= link_to idea.name, idea_sections_path(idea)
+    .col.settings= link_to "One Page Plan", idea_sections_path(idea), :class => "button small round blue" 
+    .col.settings= link_to "Settings", edit_idea_path(idea), :class => "button small round orange" 
+    .col.members= link_to "Members", idea_members_path(idea), :class => "button small round orange"
     .col.progress{:title => "#{idea.state} - #{get_progress(idea).round}% Complete"}
       %span.meter.candy{:style => "width: #{get_progress(idea)}%"}
     

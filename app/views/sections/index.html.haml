@@ -1,17 +1,27 @@
 - title @idea.name
 - subtitle @idea.description
 
-#section_list
+.horizontal-line
+
+.one-fourth
+  %ul.simple-nav
+    - @sections.each do |section|
+      %li
+        = link_to section.name, '#', :class => "on" 
+        .show_hide
+          = link_to "Hide", '#'
+    
+#section_list.inner-content.last
   - @sections.each do |section|
     = render section
 
-.comments
+.comments.one
   %h3= "#{pluralize(@comments.count, 'Comment')}"
 
-.comments_list
+.comments_list.one
   = render @comments
 
-.comment_new
+.comment_new.one
   .comment
     .icon
       = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
