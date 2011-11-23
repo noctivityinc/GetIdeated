@@ -1,3 +1,69 @@
-%h1 Ideation
+.one
+.slideshow
+  / COLUMNS CONTAINER STARTS
+  .one-third
+    / COLUMN STARTS
+    %h4
+      Your idea recorded on a 
+      %span.colored single 
+      page so you can stop 
+      %span.colored thinking 
+      and start 
+      %span.colored doing.
+    %p
+      GetIdeated.com was created to help you and your team organize your thoughts on a single page.  Five sections to complete -
+      %span.colored Vision, Mission, Objectives, Strategies
+      and 
+      %span.colored Plans - 
+      each no more than 1000 characters long.             
+    %p
+      Create as many drafts per section as you want since GetIdeated stores the complete version history of all your drafts.  Need 
+      to collaborate with others, invite them to an idea to engage in comments and discussion.      
+    %p
+      Best of all, 
+      %a.blue{:href => "#"} 
+        %b IT'S FREE
 
-	
+    %p.register
+      = link_to "Start Ideating Now!", new_user_registration_path, :class => "button big green" 
+    
+  / COLUMN ENDS
+  #slider-small
+    .slides_container.small-slider
+      / SLIDER STARTS
+      / SLIDER CONTENT STARTS
+      = image_tag "theme/slideshow/slide-small-01.jpg"
+      = image_tag "theme/slideshow/slide-small-02.jpg"
+      = image_tag "theme/slideshow/slide-small-03.jpg"
+      = image_tag "theme/slideshow/slide-small-04.jpg"
+    / SLIDESHOW CONTAINER ENDS
+/ SLIDESHOW ENDS
+.one
+  .intro-pages
+    %h3
+      “An idea that is developed and put into action is more important than an idea that exists only as an idea.”
+.one
+  .one-third
+    = image_tag "theme/icons/idea.png"
+    .text-align-left
+      %h4 Ideas => Actions
+      %p
+        Having trouble focusing on the 
+        %b next big thing?
+        GetIdeated makes it as easy as MadLibs       
+  .one-third
+    = image_tag "theme/icons/icon-1.png"
+    = image_tag "theme/icons/icon-8.png"
+    .text-align-left
+      %h4 The More Brains the Better
+      %p
+        Invite friends, coworkers or clients to review and collaborate.  As Oscar Wilde says “Most people are other people. Their thoughts are someone else's opinions, their lives a mimicry, their passions a quotation.”
+  .one-third.last
+    = image_tag "theme/icons/check-box.png"
+    .text-align-left
+      %h4 A One Page Business Plan
+      %p
+        You heard us.  Your business plan, in a page.  Amazing we know.
+  .horizontal-line
+
+

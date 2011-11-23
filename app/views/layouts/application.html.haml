@@ -3,395 +3,57 @@
 
   %head
     %title
-      = yield(:title) || "Untitled"
+    = yield(:title) || "Get Ideated.com | Focus. Plan. Dream. Do."
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    %link{:href => "images/favicon.gif", :rel => "shortcut icon", :type => "image/gif"}
+    = render 'layouts/head'
     = stylesheet_link_tag "application"
     = javascript_include_tag :application
     = csrf_meta_tag
     = yield(:head)
+    
 
   %body{:class => "#{controller.controller_name}"}     
-    #container       
-      #breadcrumbs
-        = render_breadcrumbs
-      #user_nav         
-        - if user_signed_in?
-          Signed in as 
-          = link_to current_user.name, edit_user_registration_path(current_user)
-          \. Not you?
-          = link_to "Sign out", destroy_user_session_path, :method => :delete
-        - else           
-          = link_to "Sign up", new_user_registration_path           
-          or
-          = link_to "sign in", new_user_session_path
-
-      #flash
-        - flash.each do |name, msg|
-          = content_tag :div, msg, :id => "flash_#{name}"
-
-      #page_header
-        .titles
-          - if show_title?
-            %h1.title= yield(:title)
-
-          - if show_subtitle?
-            %h2.subtitle= yield(:subtitle)
-        .placeholder
-          = yield(:placeholder)
-
-      = yield
-
-<!doctype html>
-%html{:lang => "en"}
-  %head
-    %meta{:charset => "utf-8"}/
-    %title Adventure - Clean & Simple Template
-    %meta{:content => "Clean & Simple Template - Adventure", :name => "description"}/
-    %meta{:content => "", :name => "keywords"}/
-    / META KEYWORDS
-    %meta{:content => "trendyWebstar", :name => "author"}/
-    = render 'head'
-  %body
     #wrapper
       .center
         #container
-          / WRAPPER
           #header
-            / HEADER
-            / LOGO
-            %a#logo{:href => "index.html", :title => "Homepage"}
-              %img{:alt => " ", :height => "60", :src => "images/logo.png", :width => "220"}/
-            / LOGO ENDS
-            #main_navigation.main-menu
-              / MAIN  NAVIGATION
-              %ul
-                %li
-                  %a{:href => "index.html", :title => "Home"} Home
-                %li
-                  %a{:href => "#"} Features
-                  %ul
-                    %li
-                      %a{:href => "index.html"} Simple Slider (Default)
-                    %li
-                      %a{:href => "homepage-nivo-slider.html"} Nivo  Slider
-                    %li
-                      %a{:href => "homepage-thumb.html"} Nivo Thumb Slider
-                    %li
-                      %a{:href => "homepage-content-slider.html"} Simple Content Slider
-                    %li
-                      %a{:href => "homepage-3d-slider.html"} 3D Slider
-                    %li
-                      %a{:href => "homepage-accordian-slider.html"} Accordian Slider
-                    %li
-                      %a{:href => "homepage-video-block.html"} Video Block
-                    %li
-                      %a{:href => "homepage-grid.html"} Grid Homepage
-                    %li
-                      %a{:href => "homepage-static.html"} Static Homepage
-                    %li
-                      %a{:href => "homepage-cycle-slider.html"} Cycle Slider
-                    %li
-                      %a{:href => "#"} Menu Second Level
-                      %ul
-                        %li
-                          %a{:href => "#"} Just
-                        %li
-                          %a{:href => "#"} Showing it..
-                        %li
-                          %a{:href => "#"} Third Level Menu
-                          %ul
-                            %li
-                              %a{:href => "#"} This is Third Level
-                            %li
-                              %a{:href => "#"} Showing it..
-                            %li
-                              %a{:href => "#"} It's easy to use
-                %li
-                  %a{:href => "#"} Pages
-                  %ul
-                    %li
-                      %a{:href => "#"} Our Company
-                      %ul
-                        %li
-                          %a{:href => "about-us.html"} About Us
-                        %li
-                          %a{:href => "news.html"} News Archive
-                        %li
-                          %a{:href => "services.html"} Our Services
-                        %li
-                          %a{:href => "our-team.html"} Our Team
-                        %li
-                          %a{:href => "testimonials.html"} Clients Testimonials
-                        %li
-                          %a{:href => "jobs.html"} Job Opportunities
-                        %li
-                          %a{:href => "faq.html"} F.A.Q
-                    %li
-                      %a{:href => "typography.html"} Typography & Features
-                    %li
-                      %a{:href => "columns.html"} Template Columns
-                    %li
-                      %a{:href => "fullwidth.html"} Fullwidth Page
-                    %li
-                      %a{:href => "pricing-box.html"} Pricing Boxes
-                    %li
-                      %a{:href => "pricing-table.html"} Pricing Table
-                    %li
-                      %a{:href => "404-error.html"} 404 Error
-                    %li
-                      %a{:href => "forms.html"} Forms
-                    %li
-                      %a{:href => "sign-up.html"} Sign Up
-                    %li
-                      %a{:href => "tables.html"} Tables
-                %li
-                  %a{:href => "#"} Portfolio
-                  %ul
-                    %li
-                      %a{:href => "portfolio-one-column.html"} One Column Portfolio
-                    %li
-                      %a{:href => "portfolio-two-columns.html"} Two Columns Portfolio
-                    %li
-                      %a{:href => "portfolio-three-columns.html"} Three Columns Portfolio
-                    %li
-                      %a{:href => "portfolio-four-columns.html"} Four Columns Portfolio
-                    %li
-                      %a{:href => "portfolio-four-columns-2.html"} Four Columns Portfolio 2
-                    %li
-                      %a{:href => "portfolio-five-columns.html"} Five Columns Portfolio
-                    %li
-                      %a{:href => "portfolio-sidebar.html"} Portfolio With Sidebar
-                    %li
-                      %a{:href => "gallery.html"} Gallery
-                    %li
-                      %a{:href => "portfolio-details.html"} Portfolio Details
-                    %li
-                      %a{:href => "portfolio-details-2.html"} Portfolio Details 2
-                %li
-                  %a{:href => "#"} Blog
-                  %ul
-                    %li
-                      %a{:href => "blog.html"} Blog
-                    %li
-                      %a{:href => "blog-2.html"} Blog Style II
-                    %li
-                      %a{:href => "blog-post.html"} Blog Post
-                %li
-                  %a{:href => "contact.html"} Contact Us
-                %li
-                  %fieldset.search-place
-                    %input.search-input{:onblur => "if(this.value=='')this.value='Type and hit enter';", :onfocus => "if(this.value=='Type and hit enter')this.value='';", :type => "text", :value => "Type and hit enter"}/
-            / MAIN NAVIGATION ENDS
-          / HEADER ENDS
-          / MAIN CONTAINER
+            = link_to image_tag('logo.png'), root_url
+            
+            - if user_signed_in?
+              #breadcrumbs
+                = render_breadcrumbs
+            - else
+              = render 'layouts/main_navigation'
+
+            #user_nav         
+              - if user_signed_in?
+                Signed in as 
+                = link_to current_user.name, edit_user_registration_path(current_user)
+                \. Not you?
+                = link_to "Sign out", destroy_user_session_path, :method => :delete
+
           #content
-            .one
-              .slideshow
-                #slides
-                  #slider-big
-                    .slides_container.big-slider
-                      / SLIDER STARTS
-                      / SLIDER CONTENT STARTS
-                      .slide
-                        %img{:alt => " ", :height => "350", :src => "images/slideshow/slide-04.jpg", :width => "950"}/
-                        .caption
-                          %p Your Caption Goes Here!
-                      %img{:alt => " ", :height => "350", :src => "images/slideshow/slide-02.jpg", :width => "950"}/
-                      .slide
-                        %img{:alt => " ", :height => "350", :src => "images/slideshow/slide-03.jpg", :width => "950"}/
-                        .caption
-                          %p Your Caption Goes Here!
-                      %img{:alt => " ", :height => "350", :src => "images/slideshow/slide-01.jpg", :width => "950"}/
-                    / SLIDESHOW CONTAINER ENDS
-                  .slides-nav
-                    %a.prev{:href => "#"} Previous Slide
-                    %a.next{:href => "#"} Next Slide
-                    / END .slides-nav
-              / SLIDER ENDS
-              / SLIDESHOW ENDS
-            .one
-              / COLUMNS CONTAINER STARTS
-              .intro-pages
-                / INTRO DIV STARTS
-                %h3
-                  Welcome to
-                  = succeed "," do
-                    %span.colored Adventure
-                  Clean & Simple
-                  %span.colored HTML5
-                  template.Feel free to browse through all the pages and see what's "Adventure" capable to do for You.Enjoy!
-              / INTRO ENDS
-            / COLUMNS CONTAINER ENDS
-            .one
-              .one-third
-                %img.img-align-left{:alt => " ", :height => "66", :src => "images/icons/idea.png", :width => "66"}/
-                .text-align-left
-                  %h4 Easy to Customize
-                  %p
-                    Iuraveras magnifice ex auxilium super color est cum. Ripae simul navigat est amet constanter approximavit te.
-              .one-third
-                %img.img-align-left{:alt => " ", :height => "66", :src => "images/icons/display.png", :width => "66"}/
-                .text-align-left
-                  %h4 Browsers Compatible
-                  %p
-                    Iuraveras magnifice ex auxilium super color est cum. Ripae simul navigat est amet constanter approximavit te.
-              .one-third.last
-                %img.img-align-left{:alt => " ", :height => "66", :src => "images/icons/check-box.png", :width => "66"}/
-                .text-align-left
-                  %h4 Full Documentation
-                  %p
-                    Iuraveras magnifice ex auxilium super color est cum. Ripae simul navigat est amet constanter approximavit te.
-              .horizontal-line
-            .one
-              .one-fourth
-                %p
-                  %a.portfolio-item-preview{"data-rel" => "prettyPhoto", :href => "images/slideshow/slide-01.jpg"}
-                    %img.portfolio-img.pretty-box{:alt => " ", :height => "145", :src => "images/portfolio/portfolio-img-04.jpg", :width => "210"}/
-                %h4
-                  %a{:href => "#"} Awesome Design
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia.Amice suspiciosa mare non solutionem.
-                %a{:href => "portfolio-four-columns.html"} View entire Portfolio
-              .one-fourth
-                %p
-                  %a.portfolio-item-preview{"data-rel" => "prettyPhoto", :href => "images/slideshow/slide-01.jpg"}
-                    %img.portfolio-img.pretty-box{:alt => " ", :height => "145", :src => "images/portfolio/portfolio-img-03.jpg", :width => "210"}/
-                %h4
-                  %a{:href => "#"} Awesome Design
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia.Amice suspiciosa mare non solutionem.
-              .one-fourth
-                %p
-                  %a.portfolio-item-preview{"data-rel" => "prettyPhoto", :href => "images/slideshow/slide-01.jpg"}
-                    %img.portfolio-img.pretty-box{:alt => " ", :height => "145", :src => "images/portfolio/portfolio-img-01.jpg", :width => "210"}/
-                %h4
-                  %a{:href => "#"} Awesome Design
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia.Amice suspiciosa mare non solutionem.
-              .one-fourth.last
-                %p
-                  %a.portfolio-item-preview{"data-rel" => "prettyPhoto", :href => "images/slideshow/slide-01.jpg"}
-                    %img.portfolio-img.pretty-box{:alt => " ", :height => "145", :src => "images/portfolio/portfolio-img-02.jpg", :width => "210"}/
-                %h4
-                  %a{:href => "#"} Wordpress logo
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia.Amice suspiciosa mare non solutionem.
-            / COLUMNS CONTAINER ENDS
-            .one
-              .horizontal-line
-              .one-fourth
-                / COLUMN STARTS
-                %h4
-                  %a{:href => "#"} Our Services & More
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia. Quaere allocutus ait regem ut sua etiam quantitas non solutionem invenisti.
-              / COLUMN ENDS
-              .one-fourth
-                / COLUMN STARTS
-                %h4
-                  %a{:href => "#"} Web development
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia. Quaere allocutus ait regem ut sua etiam quantitas non solutionem invenisti.
-              / COLUMN ENDS
-              .one-fourth
-                / COLUMN STARTS
-                %h4
-                  %a{:href => "#"} Web Design
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia. Quaere allocutus ait regem ut sua etiam quantitas non solutionem invenisti.
-              / COLUMN ENDS
-              .one-fourth.last
-                / COLUMN STARTS
-                %h4
-                  %a{:href => "#"} Web Hosting
-                %p
-                  Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia. Quaere allocutus ait regem ut sua etiam quantitas non solutionem invenisti.
-              / COLUMN ENDS
-              .horizontal-line
-            #footer-wrapper
-              / FOOTER WRAPPER STARTS
-              #footer-container
-                / FOOTER CONTAINER STARTS
-                #footer
-                  / FOOTER STARTS
-                  .one
-                    / COLUMN CONTAINER STARTS
-                    .one-fourth
-                      / COLUMN STARTS
-                      %h4 About Us
-                      %p
-                        Lorem ipsum dolor sit amet, tollite fit manibus individuationis omnibus civitas ad quia. Quaere allocutus ait regem ut sua etiam quantitas non solutionem invenisti. Venis potest flens ibidem quod eam in. Ambo una litus vita Apolloni codicellos iam.
-                    / COLUMN ENDS
-                    .one-fourth
-                      / COLUMN STARTS
-                      %h4 Latest Posts
-                      %ul
-                        / LATEST POSTS UL
-                        %li
-                          %a{:href => "blog.html"} Custom iPhone App Design & Programming Applications
-                          %p
-                            April 26, 2011 ·
-                            %a{:href => "blog.html"} 14 Comments
-                        %li
-                          %a{:href => "blog.html"} A New Approach To Web Design For Mobile Devices
-                          %p
-                            March 19, 2011 ·
-                            %a{:href => "blog.html"} 68 Comments
-                      / END UL
-                    / COLUMN ENDS
-                    .one-fourth
-                      / COLUMN STARTS
-                      %h4 Stay in Touch
-                      %ul.social-links
-                        / SOCIAL LINKS STARTS
-                        %li
-                          %img{:alt => "#", :height => "16", :src => "images/icons/facebook.png", :width => "16"}/
-                          %a{:href => "#"} Our Facebook page
-                        %li
-                          %img{:alt => "#", :height => "16", :src => "images/icons/twitter.png", :width => "16"}/
-                          %a{:href => "#"} Follow us on Twitter
-                        %li
-                          %img{:alt => "#", :height => "16", :src => "images/icons/rss.png", :width => "16"}/
-                          %a{:href => "#"} Our RSS Feeds
-                        %li
-                          %img{:alt => "#", :height => "16", :src => "images/icons/vimeo.png", :width => "16"}/
-                          %a{:href => "#"} Our Vimeo Videos
-                      / SOCIAL LINKS ENDS
-                    / COLUMN ENDS
-                    .one-fourth.last
-                      / COLUMN STARTS
-                      %h4 Latest Tweets
-                      .tweet
-                    / COLUMN ENDS
-                  / COLUMN CONTAINER ENDS
-                / FOOTER ENDS
-              / FOOTER CONTAINER ENDS
-            / FOOTER WRAPPER ENDS
-            #copyright-wrapper
-              / COPYRIGHTS WRAPPER STARTS
-              #copyright
-                %a#copyright-logo{:href => "#", :title => "Homepage"}
-                  %img{:alt => " ", :height => "50", :src => "images/logo-bottom.png", :width => "185"}/
-                .right
-                  %p
-                    %a{:href => "#"} Home
-                    \/
-                    %a{:href => "#"} Features
-                    \/
-                    %a{:href => "#"} Pages
-                    \/
-                    %a{:href => "#"} Portfolio
-                    \/
-                    %a{:href => "#"} Blog
-                    \/
-                    %a{:href => "#"} Typography & Columns
-                    \/
-                    %a{:href => "#"} Contact
-                  %span
-                    © Copyright 2011. All rights reserved. Template created by:
-                    %a{:href => "http://themeforest.net/user/trendyWebStar"} trendyWebStar
-              / COPYRIGHTS ENDS
-            / COPYRIGHTS WRAPPER ENDS
-  / BODY ENDS
-/ HTML ENDS
-/ Copyright by trendyWebStar
+            #flash
+              - flash.each do |name, msg|
+                = content_tag :div, msg, :id => "flash_#{name}"
+
+            #page_header
+              .titles
+                - if show_title?
+                  %h1.title= yield(:title)
+
+                - if show_subtitle?
+                  %h2.subtitle= yield(:subtitle)
+              .placeholder
+                = yield(:placeholder)
+
+            = yield
+
+            .horizontal-line
+            = render 'layouts/footer'
+            = render 'layouts/copyright'
+
+      
+
+      

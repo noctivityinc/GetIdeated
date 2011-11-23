@@ -121,7 +121,7 @@ jQuery("#slider-small").slides({
 		preload: true,
 		effect: 'fade',
 		fadeSpeed: 550,
-		play: 3000
+		play: 5000
 		
 		});
 	});

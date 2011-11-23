@@ -1,89 +1,78 @@
-$primary_color: #4b7399
-
-body
-  background-color: $primary_color
-  font:
-    family: Helvetica, Arial, Verdana
-    size: 14px
-
-a
-  color: blue
-  img
-    border: none
-
 .clear
   clear: both
   height: 0
   overflow: hidden
 
-#container
-  width: 75%
-  margin: 0 auto
-  background: white
-  padding: 20px 40px
-  border: solid 1px black
-  margin-top: 20px
+.main-menu ul li.controls
+  margin-left: 20px
 
-  #breadcrumbs
+.main-menu ul li a.button
+  line-height: 20px
+  color: #fff
+  margin-left: 10px
+  &:visited
+    color: #fff
+
+#breadcrumbs
+  float: left
+  font-size: 10px
+
+#page_header
+  overflow: hidden
+  .titles
     float: left
-    font-size: 10px
-
-  #page_header
-    overflow: hidden
-    .titles
-      float: left
-      width: 65%
-    .placeholder
-      padding: 15px
-      float: right
-
-  #user_nav
+    width: 65%
+  .placeholder
+    padding: 15px
     float: right
-    display: block
-    margin-bottom: 15px
-    font-size: 10px
 
-  #flash
-    display: block
-    clear: both
-    
-  #flash_notice,
-  #flash_error,
-  #flash_alert
-    padding: 5px 8px
-    margin: 10px 0
+#user_nav
+  float: right
+  display: block
+  margin-bottom: 15px
+  font-size: 10px
 
-  #flash_notice
-    background-color: #ccffcc
-    border: solid 1px #66cc66
+#flash
+  display: block
+  clear: both
+  
+#flash_notice,
+#flash_error,
+#flash_alert
+  padding: 5px 8px
+  margin: 10px 0
 
-  #flash_error,
-  #flash_alert
-    background-color: #ffcccc
-    border: solid 1px #cc6666
+#flash_notice
+  background-color: #ccffcc
+  border: solid 1px #66cc66
 
-  .fieldWithErrors
-    display: inline
+#flash_error,
+#flash_alert
+  background-color: #ffcccc
+  border: solid 1px #cc6666
 
-  .error_messages
-    width: 400px
-    border: 2px solid #cf0000
-    padding: 0
-    padding-bottom: 12px
-    margin-bottom: 20px
-    background-color: #f0f0f0
+.fieldWithErrors
+  display: inline
+
+.error_messages
+  width: 400px
+  border: 2px solid #cf0000
+  padding: 0
+  padding-bottom: 12px
+  margin-bottom: 20px
+  background-color: #f0f0f0
+  font:
+    size: 12px
+  h2
+    text-align: left
+    padding: 5px 5px 5px 15px
+    margin: 0
     font:
+      weight: bold
       size: 12px
-    h2
-      text-align: left
-      padding: 5px 5px 5px 15px
-      margin: 0
-      font:
-        weight: bold
-        size: 12px
-      background-color: #cc0000
-      color: white
-    p
-      margin: 8px 10px
-    ul
-      margin: 0
+    background-color: #cc0000
+    color: white
+  p
+    margin: 8px 10px
+  ul
+    margin: 0

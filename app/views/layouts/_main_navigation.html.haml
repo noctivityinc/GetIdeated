@@ -1,0 +1,11 @@
+#main_navigation.main-menu
+  %ul
+    %li= link_to "Home", root_url
+    %li= link_to "The Concept", '#'
+    %li= link_to "Plans", '#'
+    %li= link_to "Contact Us", '#'
+    %li.controls
+      %p= link_to "Sign In", new_user_session_path, :class => "button big black round" 
+    %li
+      %p= link_to "Register", new_user_registration_path, :class => "button big green round" 
+      
