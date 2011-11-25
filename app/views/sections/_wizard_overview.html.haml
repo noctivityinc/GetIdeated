@@ -1,0 +1,18 @@
+%h3 Formulizing Your Idea
+%p
+  GetIdeated was created to help you quickly focus the millions of thoughts 
+  you have about your idea.  The next five screens will guide you 
+  through creating your...
+%ul.round-list
+  - @sections.each do |section|
+    %li= section.name
+%p
+  \...with examples and descriptions for each section.  Don't worry if your 
+  thoughts are half-baked, we save every version you create so just get your 
+  thoughts down now and revisit later.
+%p
+  And finally, use GetIdeated as a virtual whiteboard, sharing the idea with 
+  others, posting comments and discussing the fine points of each section. 
+
+.wizard_controls
+  = link_to "Enough.  Time for the Vision >>", section_path(@sections.first, :wizard => true), :class => 'next button big green round', 'data-next' => @sections.first

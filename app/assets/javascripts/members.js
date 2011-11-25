@@ -1,4 +1,4 @@
-$(function() {
+jQuery(document).ready(function($) {
   $('.add_member').click(function(e) {
     e.preventDefault();
     loadInviteForm();

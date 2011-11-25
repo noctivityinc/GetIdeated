@@ -1,4 +1,8 @@
 module IdeasHelper
+	def first_idea?
+		return current_user.ideas.empty?
+	end
+
   def get_progress(idea)
     # give them 1 point just for starting the idea
     sections_with_content = idea.sections.select {|x| !x.content.blank?}.count

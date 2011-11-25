@@ -1,11 +1,37 @@
 #container
+  #left_nav
+    .simple-nav
+      .on
+        color: #F26C4F
+      li
+        overflow: hidden
+        
+        .nav_stats
+          float: right
+          width: 40px
+          color: gray
+          span
+            display: inline-block
+
+            &:hover
+              background-color: #C0C0C0
   .section
     margin-bottom: 15px
     h3
-      float: left
       margin: 0px
       padding: 0px
       color: gray
+      overflow: hidden
+      a
+        float: left
+
+      .show_description, .add_comment a
+        font-size: 10px
+        color: #999
+        diplay: inline
+        font-family : 'Droid Sans'
+        float: right
+        margin-left: 15px
 
     .controls
       float: right
@@ -29,7 +55,6 @@
           cursor: pointer
 
     form
-      display: none
       overflow: hidden
       clear: both
       
@@ -38,6 +63,10 @@
         width: 98%
         height: 50px
         padding: 5px
+        margin-top: 10px
+
+      .secondary
+        clear: both
         margin-top: 10px
 
       .cancel, .minor, .chars_left
@@ -57,6 +86,12 @@
         clear: both
         margin-top: 10px
         float: left
+
+      .saved
+        display: none
+        margin-left: 15px
+        font-size: 12px
+        font-weight: bold
 
     .author
       display: block

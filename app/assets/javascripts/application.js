@@ -11,5 +11,6 @@
 //= require_tree .
 //= require 'theme/custom'
 
-
-$.ajaxSettings.dataType = "html";
+jQuery(document).ready(function($) {
+  $.ajaxSettings.dataType = "html";
+})

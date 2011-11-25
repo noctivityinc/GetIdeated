@@ -1,6 +1,25 @@
-$(function() {
-  $('.section h6').each(function(ndx, el){
-      
+jQuery(document).ready(function($) {
+
+  $('.nav_stats span').live('click', function(ev) {
+    ev.preventDefault();
+    var url = $(this).attr('data-href');
+    location.href = url;
+  });
+
+  $('a.show_description').click(function(e) {
+    e.preventDefault();
+
+    var $self = $(this);
+    var $section = $(this).closest('.section');
+    var $description = $section.find('.description');
+    $description.toggle('fast', function(){
+      $self.text($description.is(':visible') ? 'Hide Help ' : 'Show Help');   
+    });
+  });
+
+  $('.section .description').each(function() {
+    var $section = $(this).closest('.section');
+    $section.find('a.show_description').text($(this).is(':visible') ? 'Hide Help ' : 'Show Help'); 
   });
 
   $('#new_comment').live('ajax:success', function(evt, data, status, xhr) {

@@ -1,11 +1,16 @@
 Ideation::Application.routes.draw do
 
+  match '/examples' => 'examples#index'
   match '/user' => "ideas#index", :as => :user_root
   devise_for :users
 
   resources :ideas do
     resources :sections, :shallow=>true do
-      resources :versions, :shallow=>true 
+      resources :versions, :shallow=>true do 
+        member do
+          get 'revert'
+        end
+      end
       resources :comments, :shallow=>true
     end
     resources :comments, :shallow=>true

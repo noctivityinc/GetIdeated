@@ -1,7 +1,14 @@
 - title "Idea: #{@section.idea.name}"
+- subtitle "Version History for #{@section.name}" + "#{@versions.count > 0 ? ' : ' + pluralize(@versions.count,'Version') : '' }"
 
-.version.current
-  = render :partial => @section, :locals => {:show_author => true}
+.horizontal-line
 
-.version_list
-  = render @versions
+.one-fourth
+  = render 'layouts/left_nav'
+
+.inner-content.last    
+  .version.current
+    = render :partial => @section, :locals => {:edit_mode => false, :hide_version_count => true }
+
+  .version_list{'data-version-list' => url_for(section_versions_path(@section))}
+    = render @versions

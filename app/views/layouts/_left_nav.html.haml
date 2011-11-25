@@ -1,0 +1,13 @@
+#left_nav
+  %ul.simple-nav
+    - @sections.each do |section|
+      %li
+        - if section == @section && !(params[:body_action] == 'index')
+          = link_to section.name, section, :class => 'on'
+        - else
+          = link_to section.name, section
+          .nav_stats
+            %span.ui-icon.ui-icon-comment{:title => pluralize(section.comments.count, 'comment'), 'data-href' => section_path(section)}
+            %span.ui-icon.ui-icon-document{:title => pluralize(section.versions.count, 'version'), 'data-href' => section_versions_path(section)}
+
+  = link_to "One Page Plan", idea_sections_path(@sections.first.idea), :class => 'button small round light-blue'

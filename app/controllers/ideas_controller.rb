@@ -3,6 +3,9 @@ class IdeasController < ApplicationController
 
   def index
     @ideas = current_user.ideas.all
+    if @ideas.empty?
+      redirect_to new_idea_path
+    end
   end
 
   def show
@@ -17,7 +20,7 @@ class IdeasController < ApplicationController
   def create
     @idea = current_user.own_ideas.new(params[:idea])
     if @idea.save
-      redirect_to idea_sections_path(@idea), :notice => "#{@idea.name} Idea Created."
+      redirect_to idea_sections_path(@idea, :wizard => true), :notice => "#{@idea.name} Idea Created."
     else
       render :action => 'new'
     end

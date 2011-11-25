@@ -2,6 +2,9 @@
   .icon
     = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
   .col
+    .num= "Version #{@versions.count - version_counter}"
+    - if version_counter > 0 
+      .revert= link_to "revert", revert_version_path(version), :confirm => "Are you sure you want to revert to this version?"
     .name= version.user.name
     .date= version.updated_at
-    .content= version.content
+    .text= version.content.html_safe

@@ -1,29 +1,41 @@
 - section ||= @section;  section.minor = false
-- show_author ||= false
-
+- edit_mode = true if edit_mode.nil?
+- hide_version_count = false if hide_version_count.nil?
 
 .section
-  %h3= section.name
-  .controls
-    = link_to "Edit", '#', :class => 'edit' 
-    = link_to "Comments (#{section.comments.count})", section
-    = link_to_unless controller.controller_name == 'versions', "Versions (#{section.versions.count})", section_versions_path(section)
+  %h3.name
+    = link_to section.name, section
+    - if !wizard?
+      = link_to "Help", '#', :class => "show_description" 
+    .add_comment
+      = link_to "Add Comment", section_path(section, :anchor => 'comment_new')
+    
+
   .clear
-  %h6= section.description
-  .version
-    %div= section.content
-  = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))}  do |f|
-    = f.text_area :content, :maxlength => 1000
-    .minor 
-      = f.check_box :minor
-      Minor Edit.  Don't save version
-    .chars_left
-      = "#{section.content.blank? ? 1000 : 1000 - section.content.length} characters left"
-    .controls
-      = link_to "Cancel", '#', :class => "cancel button small"
-      = f.submit "Update the #{section.name}"
-  
-  - if section.user && show_author
+  %h6.description{:class => "#{wizard? ? 'wizard' : ''}"}= section.description
+
+  = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))} do |f|
+    = hidden_field_tag 'body_action', 'action', :class => "body_action"     
+    .editor{:contenteditable => "true", :id => "section_content#{section.id}", 'data-field-name' => "section[content]", :placeholder => "Click to edit the #{section.name}"}= section.content.nil? ? 'Click to edit this section' : section.content.html_safe
+
+    .secondary{:style => "display: #{wizard? && edit_mode ? 'block' : 'none'}"}
+      .minor 
+        = f.check_box :minor
+        Minor Edit.  Don't save version
+      .chars_left
+        = "#{section.content.blank? ? 1000 : 1000 - section.content.length} characters left"
+
+      .controls
+        = link_to "Cancel", '#', :class => "cancel button small round dark-blue"
+        = f.submit "Update the #{section.name}", :class => "button big round blue"
+
+    .saved 
+      = image_tag "theme/icons/yes.png"
+      Saved!
+    
+  - if section.user 
     .author
-      = "#{section.user.name} updated the #{section.name} on #{section.updated_at}" 
-      
+      = "#{section.user.name} updated the #{section.name} on #{section.updated_at} - " 
+      = link_to "View Version History (#{section.versions.count})", section_versions_path(section) unless controller.controller_name == 'versions'
+      = link_to  "View Comments (#{section.comments.count})", section unless controller.controller_name == 'sections' && controller.action_name == 'show'
+        

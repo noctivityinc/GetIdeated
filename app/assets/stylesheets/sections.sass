@@ -1,12 +1,39 @@
-.sections
-  .simple-nav
-    .on
-      color: #F26C4F
-    .show_hide
-      display: inline
-      float: right
-      a
-        background: none
+.sections  
+  &.index
+    #container
+      .section
+        .description
+          display: none
+          &.wizard
+            display: block
+
+        .controls
+          height: 36px
+          font-weight: bold
+
+        .author
+          display: none
+
+  &.show
+    .controls
+      font-weight: normal
+
+  .inner-content
+    .round-list
+      border: none
+      li
+        border: none
+    
+    .wizard_controls
+      display: block
+      overflow: hidden
+
+      .back
+        float: left
+
+      .next
+        float: right
+        padding: 5px
 
   .locked
     float: right
@@ -24,7 +51,7 @@
       background-position: top left
 
   .comments
-    margin-top: 60px
+    margin-top: 30px
 
   .comment
     padding: 10px 0px
@@ -65,7 +92,7 @@
         .header
           background: #f0f0f0
           padding: 5px 10px
-          border: 1px solid black
+          border: 1px solid #EBEBEB
           border-bottom: none
           width: 90%
           font-size: 10px

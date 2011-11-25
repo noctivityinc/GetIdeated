@@ -4,39 +4,25 @@
 .horizontal-line
 
 .one-fourth
-  %ul.simple-nav
-    - @sections.each do |section|
-      %li
-        = link_to section.name, '#', :class => "on" 
-        .show_hide
-          = link_to "Hide", '#'
-    
-#section_list.inner-content.last
-  - @sections.each do |section|
-    = render section
+  = render 'layouts/left_nav'
 
-.comments.one
-  %h3= "#{pluralize(@comments.count, 'Comment')}"
+.inner-content.last    
+  - if wizard?
+    = render 'wizard_overview'
 
-.comments_list.one
-  = render @comments
+  - else 
+    #section_list
+      - @sections.each do |section|
+        %div{:class => section.name}
+          = render :partial => section
 
-.comment_new.one
-  .comment
-    .icon
-      = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
-    .col
-      %b Leave a comment...
-      .text
-        .header
-          Format text with Textile 
-          = link_to "(help with Textile)", "http://www.textism.com/tools/textile/", :target => "_blank" 
-        = form_for [@idea, @comment], :remote => true, :html => {'data-comment-list' => url_for(idea_comments_path(@idea))}  do |f|
-          = f.text_area :content, :required => true
-          .controls
-            = link_to "Cancel", '#', :class => "cancel button small"
-            = f.submit "Add this Comment"
-    
+  .horizontal-line
 
+  .comments
+    %h5= "#{pluralize(@comments.count, 'Comment')} About the Idea"
 
-      
+  .comments_list
+    = render @comments
+
+  .comment_new
+    = render :partial => 'comment_new', :locals => {:form_url => [@idea, @comment], :data_comment_list_path => idea_comments_path(@idea)}  

@@ -3,7 +3,7 @@ class VersionsController < ApplicationController
 
   def index
     @versions = @section.versions.all
-    @versions.shift       # => remove the first one since that's the current version
+    # @versions.shift       # => remove the first one since that's the current version
 
     respond_to do |wants|
       wants.html {
@@ -13,46 +13,23 @@ class VersionsController < ApplicationController
     end
   end
 
-  def show
-    @version = @section.versions.find(params[:id])
-  end
-
-  def new
-    @version = @section.versions.new
-  end
-
-  def create
-    @version = @section.versions.new(params[:version])
-    if @version.save
-      redirect_to @version, :notice => "Successfully created version."
-    else
-      render :action => 'new'
-    end
-  end
-
-  def edit
-    @version = @section.versions.find(params[:id])
-  end
-
-  def update
-    @version = @section.versions.find(params[:id])
-    if @version.update_attributes(params[:version])
-      redirect_to @version, :notice  => "Successfully updated version."
-    else
-      render :action => 'edit'
-    end
-  end
-
-  def destroy
-    @version = @section.versions.find(params[:id])
-    @version.destroy
-    redirect_to versions_url, :notice => "Successfully destroyed version."
+  def revert
+    @section.update_attribute(:content, @version.content)
+    flash[:notice] = "Version reverted successfully"
+    redirect_to section_versions_path(@section)
   end
 
   private
 
   def get_section
-    @section = Section.find_by_id(params[:section_id])
+    if params[:section_id] 
+      @section = Section.find_by_id(params[:section_id])
+    elsif params[:id]
+      @version = Version.find_by_id(params[:id])
+      @section = @version.section if @version
+    end
+
+    @sections = @section.idea.sections.all
     redirect_to root_url, :notice => "Section could not be found" unless @section
   end
 

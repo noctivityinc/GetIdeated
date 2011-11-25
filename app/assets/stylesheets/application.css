@@ -8,7 +8,11 @@
 *= require formtastic_ie6
 *= require formtastic_ie7
 *= require style
-*= require_tree . 
 *= require formtastic_changes
+*= require jquery.qtip.css
+*= require common
+*= require_tree
+*= require editor
+
 
 */

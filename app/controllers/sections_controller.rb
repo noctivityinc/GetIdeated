@@ -10,6 +10,7 @@ class SectionsController < ApplicationController
 
   def show
     @section = Section.find(params[:id])
+    @sections = @section.idea.sections.all    
     @comments = @section.comments.all
     @comment = @section.comments.new
     set_breadcrumbs
@@ -35,15 +36,14 @@ class SectionsController < ApplicationController
   def update
     @section = Section.find(params[:id])
     @section.user = current_user
-    if @section.update_attributes(params[:section])
-      flash[:notice] = "#{@section.name} successfully updated" 
-    else
-      flash[:error] = "#{@section.name} failed to update" 
-    end
+    @section.update_attributes(params[:section])
+
+    # needed for left nav
+    @sections = @section.idea.sections.all   
 
     respond_to do |wants|
       wants.html {
-        render @section if request.xhr?
+        render :json => {:section => render_to_string(@section), :left_nav => render_to_string(:partial => 'layouts/left_nav')} if request.xhr?
       }
       wants.js  { render @section }
     end

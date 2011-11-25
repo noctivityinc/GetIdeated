@@ -5,7 +5,14 @@ gem 'rails', '3.1.2'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+
+group :development, :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
+
+group :production do
+	gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -23,6 +30,7 @@ gem 'tabletastic'
 gem 'gravatar_image_tag'
 gem "breadcrumbs_on_rails"
 gem 'postmark-rails'
+gem 'RedCloth'
 
 gem "nifty-generators", :group => :development
 
