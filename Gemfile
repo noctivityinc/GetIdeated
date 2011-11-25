@@ -41,7 +41,9 @@ gem "nifty-generators", :group => :development
 gem 'unicorn'
 
 # To use debugger
-gem 'ruby-debug19', :require => 'ruby-debug'
+group :development, :test do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
 
 group :test do
   # Pretty printed test output
