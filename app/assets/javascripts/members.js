@@ -29,9 +29,11 @@ jQuery(document).ready(function($) {
     var url = $(this).attr('href');
     $('.list').load(url, {_method: 'DELETE'});
   });
+
+  function loadInviteForm () {
+    var url = $('.new_invite').attr('data-new-invite-url');
+    $('.new_invite').load(url)
+  }
+
 });
 
-function loadInviteForm () {
-  var url = $('.new_invite').attr('data-new-invite-url');
-  $('.new_invite').load(url)
-}
