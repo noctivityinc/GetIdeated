@@ -14,7 +14,6 @@ class IdeasController < ApplicationController
 
   def new
     @idea = current_user.ideas.new
-    add_breadcrumb "Ideas", ideas_path
   end
 
   def create
