@@ -4,4 +4,6 @@
     = f.input :description, :input_html => { :placeholder => "One line quick description.  200 chars max" } 
     = f.input :state_id, :as => :select,   :collection => State.not_internal,  :include_blank => false
 
-  = f.buttons 
+  = f.buttons do
+    = f.commit_button :button_html => {:class => "button big round blue"}
+    

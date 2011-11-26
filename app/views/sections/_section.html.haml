@@ -14,24 +14,27 @@
   .clear
   %h6.description{:class => "#{wizard? ? 'wizard' : ''}"}= section.description
 
-  = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))} do |f|
-    = hidden_field_tag 'body_action', 'action', :class => "body_action"     
-    .editor{:contenteditable => "true", :id => "section_content#{section.id}", 'data-field-name' => "section[content]", :placeholder => "Click to edit the #{section.name}"}= section.content.nil? ? 'Click to edit this section' : section.content.html_safe
+  - if current_user.authorized_to_edit?(section.idea)
+    = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))} do |f|
+      = hidden_field_tag 'body_action', 'action', :class => "body_action"     
+      .editor{:contenteditable => "true", :id => "section_content#{section.id}", 'data-field-name' => "section[content]", :placeholder => "Click to edit the #{section.name}"}= section.content.nil? ? 'Click to edit this section' : section.content.html_safe
 
-    .secondary{:style => "display: #{wizard? && edit_mode ? 'block' : 'none'}"}
-      .minor 
-        = f.check_box :minor
-        Minor Edit.  Don't save version
-      .chars_left
-        = "#{section.content.blank? ? 1000 : 1000 - section.content.length} characters left"
+      .secondary{:style => "display: #{wizard? && edit_mode ? 'block' : 'none'}"}
+        .minor 
+          = f.check_box :minor
+          Minor Edit.  Don't save version
+        .chars_left
+          = "#{section.content.blank? ? 1000 : 1000 - section.content.length} characters left"
 
-      .controls
-        = link_to "Cancel", '#', :class => "cancel button small round dark-blue"
-        = f.submit "Update the #{section.name}", :class => "button big round blue"
+        .controls
+          = link_to "Cancel", '#', :class => "cancel button small round dark-blue"
+          = f.submit "Update the #{section.name}", :class => "button big round blue"
 
-    .saved 
-      = image_tag "theme/icons/yes.png"
-      Saved!
+      .saved 
+        = image_tag "theme/icons/yes.png"
+        Saved!
+  - else
+    .section_content= section.content.nil? ? 'TBD' : section.content.html_safe 
     
   - if section.user 
     .author

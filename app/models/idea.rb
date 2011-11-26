@@ -13,6 +13,10 @@ class Idea < ActiveRecord::Base
     State.find(self.state_id).name
   end
 
+  def owner
+    self.members.detect {|x| x.is_owner?}.user
+  end
+
   private
 
   def create_sections

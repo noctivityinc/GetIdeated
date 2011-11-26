@@ -5,8 +5,8 @@ Ideation::Application.routes.draw do
   devise_for :users
 
   resources :ideas do
-    resources :sections, :shallow=>true do
-      resources :versions, :shallow=>true do 
+    resources :sections, :except => [:new, :edit], :shallow=>true do
+      resources :versions, :only => [:index],  :shallow=>true do 
         member do
           get 'revert'
         end
@@ -15,7 +15,12 @@ Ideation::Application.routes.draw do
     end
     resources :comments, :shallow=>true
     resources :members, :only => [:index, :destroy], :shallow=>true
-    resources :invites, :only => [:new, :create, :destroy], :shallow=>true
+    resources :invites, :only => [:new, :create, :destroy], :shallow=>true do
+      member do
+        get 'accept'
+        get 'resend'
+      end
+    end
   end
 
   get "home/index"

@@ -8,8 +8,9 @@
   .idea
     %h5.col.name= link_to idea.name, idea_sections_path(idea)
     .col.settings= link_to "One Page Plan", idea_sections_path(idea), :class => "button small round blue" 
-    .col.settings= link_to "Settings", edit_idea_path(idea), :class => "button small round orange" 
-    .col.members= link_to "Members", idea_members_path(idea), :class => "button small round orange"
+    - if idea.owner == current_user
+      .col.settings= link_to "Settings", edit_idea_path(idea), :class => "button small round orange" 
+      .col.members= link_to "Members", idea_members_path(idea), :class => "button small round orange"
     .col.progress{:title => "#{idea.state} - #{get_progress(idea).round}% Complete"}
       %span.meter.candy{:style => "width: #{get_progress(idea)}%"}
     

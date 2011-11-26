@@ -1,0 +1,18 @@
+= "Hi #{@member.user.name},"
+\
+= "You are now #{@member.is_owner? ? 'the owner' : 'a ' + @member.status.downcase} of the #{@member.idea.name} ideation plan."
+\
+You can view the plan here:
+\
+= idea_sections_url(@member.idea)
+\
+\
+Happy Ideating,
+\
+\
+\
+GetIdeating.com
+\
+\------------------------------
+powered by GetIdeating.com
+\------------------------------

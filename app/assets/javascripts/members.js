@@ -4,8 +4,11 @@ jQuery(document).ready(function($) {
     loadInviteForm();
   });
 
+  $('.members .member:odd').css('background-color', '#f0f0f0');
+
   $('.new_invite form').live('ajax:success', function(evt, data, status) {
     $('.list').html(data);
+    $('#invitations .invite:first').effect("highlight", {}, 1500);
     $('.new_invite').html('');
   }).live('ajax:complete', function(evt, data, status) {
     if(status == 'error') {
@@ -16,23 +19,11 @@ jQuery(document).ready(function($) {
     $('.new_invite').html('');
   });;
 
-  $('.remove').live('click',function(e) {
-    e.preventDefault();
-
-    var url = $(this).attr('href');
-    $('.list').load(url, {_method: 'DELETE'});
-  });
-
-  $('.uninvite').live('click',function(e) {
-    e.preventDefault();
-
-    var url = $(this).attr('href');
-    $('.list').load(url, {_method: 'DELETE'});
-  });
-
   function loadInviteForm () {
     var url = $('.new_invite').attr('data-new-invite-url');
-    $('.new_invite').load(url)
+    $('.new_invite').load(url, function() {
+      $('#invite_email').focus();
+    })
   }
 
 });

@@ -11,6 +11,9 @@
   --------------------------------------------------------------------------------------------------*/
 
 .formtastic 
+  .button
+    float: none
+
   .input
     label, .label
       font-weight: normal
@@ -99,13 +102,19 @@
       font-size: 11px  
 
 form.formtastic fieldset.buttons 
-  li.commit
-    input
-      &[type=submit]
-        :margin 0px
-        :padding 5px
-        font-size: 1.2em
-        :text-align right
+  ol
+    display: block
+    clear: both
+    margin-top: 10px
+    float: left
+
+    li
+      display: inline
+
+    li.commit
+      input
+        &[type=submit]
+          :margin 0px 0px 0px 5px
 
 form.formtastic fieldset ol 
   li.string, li.password, li.stringish

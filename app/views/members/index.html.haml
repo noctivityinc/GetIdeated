@@ -2,9 +2,14 @@
 - subtitle "Idea: #{@idea.name}"
 
 - content_for :placeholder do
-  = link_to "+ Add Member", '#', :class => "add_member button green large", :remote => true 
+  = link_to "+ Add Member", '#', :class => "add_member button green big", :remote => true 
 
-.list
-  = render 'list'
-  
-.new_invite{'data-new-invite-url' => new_idea_invite_url(@idea)}
+.one-fourth
+  = render 'layouts/left_nav'
+
+.inner-content.last    
+
+  .list
+    = render 'list'
+    
+  .new_invite{'data-new-invite-url' => new_idea_invite_url(@idea)}

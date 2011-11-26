@@ -1,5 +1,5 @@
 class InvitesController < ApplicationController
-  before_filter :get_idea, :except => :destroy
+  before_filter :get_idea, :only => [:new, :create]
   layout :false
 
   def new
@@ -26,10 +26,36 @@ class InvitesController < ApplicationController
     @invite = Invite.find(params[:id])
     @invite.destroy
 
-    respond_to do |wants|
-      wants.html {
-        render :partial => 'members/list', :locals => {:idea => @invite.idea}  if request.xhr?
-      }
+    redirect_to idea_members_path(@invite.idea), :notice => "Your invitation to #{@invite.email} has been rescinded." 
+  end
+
+  def accept
+    @invite = Invite.find_by_token(params[:id])
+    if @invite.nil?
+      flash[:error] = "Sorry, this invitation code cannot be found." 
+      redirect_to root_url 
+    elsif @invite.expired? 
+      flash[:error] = "Sorry, this invitation has expired.  Please contact #{@invite.name} to request a new invitation to the idea."
+      redirect_to root_url
+    elsif @invite
+      session[:invite_id] = @invite.id
+      if User.find_by_email(@invite.email) 
+        flash[:notice] = "To accept #{@invite.user.name}'s invitation to #{@invite.idea.name}, please login to your GetIdeated account below."
+        redirect_to new_user_session_path
+      else
+        flash[:notice] = "To accept #{@invite.user.name}'s invitation to #{@invite.idea.name}, please create an account below."
+        redirect_to new_user_registration_path
+      end
+    end
+  end
+
+  def resend
+    @invite = Invite.find_by_id(params[:id])
+    if @invite
+      @invite.resend
+      redirect_to idea_members_path(@invite.idea), :notice => "Your invitation to #{@invite.email} has been resent" 
+    else
+      redirect_to ideas_path, :error => "Could not resend that invitation" 
     end
   end
 

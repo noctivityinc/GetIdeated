@@ -2,6 +2,7 @@ class Invite < ActiveRecord::Base
   attr_accessible :email, :user_id, :idea_id, :can_edit, :token, :expires_at
 
   before_create :set_token_and_expires
+  after_create :send_invite
 
   validates_presence_of :email, :user_id, :idea_id
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
@@ -14,6 +15,16 @@ class Invite < ActiveRecord::Base
   scope :not_expired, :conditions => ['expires_at > ?', Date.today]
   scope :expired, :conditions => ['expires_at <= ?', Date.today]
 
+  def expired?
+    self.expires_at <= Date.today    
+  end
+
+  def resend
+    set_token_and_expires
+    self.save
+    send_invite
+  end
+
   private
 
   def set_token_and_expires
@@ -24,5 +35,9 @@ class Invite < ActiveRecord::Base
   def not_a_member
     errors.add(:email, 'is already a member of this idea') if 
     self.idea.members.detect {|x| x.user.email.downcase == self.email.downcase}
+  end
+
+  def send_invite
+    InviteMailer.invite(self).deliver
   end
 end

@@ -17,10 +17,15 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_mail
 
+  def authorized_to_edit?(idea)
+    member = idea.members.detect {|x| x.user == self}
+    return member && member.can_edit
+  end
+
   private
 
   def send_welcome_mail
-     UserMailer.welcome(self).deliver
+    UserMailer.welcome(self).deliver
   end
 
 end

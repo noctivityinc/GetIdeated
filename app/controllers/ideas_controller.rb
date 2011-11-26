@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_for_invitations
+  before_filter :get_idea, :except => [:index, :new, :create] 
 
   def index
     @ideas = current_user.ideas.all
@@ -9,7 +11,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @idea = current_user.ideas.find(params[:id])
   end
 
   def new
@@ -26,12 +27,10 @@ class IdeasController < ApplicationController
   end
 
   def edit
-    @idea = current_user.ideas.find(params[:id])
     set_breadcrumbs
   end
 
   def update
-    @idea = current_user.ideas.find(params[:id])
     if @idea.update_attributes(params[:idea])
       redirect_to idea_sections_path(@idea), :notice => "#{@idea.name} Idea Updated."
     else
@@ -40,9 +39,28 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    @idea = current_user.ideas.find(params[:id])
     @idea.destroy
     redirect_to ideas_url, :notice => "Successfully destroyed the idea for #{@idea.name}.  So sad.  What's next?"
+  end
+
+  private
+
+  def check_for_invitations
+    if session[:invite_id]
+      @invite = Invite.find_by_id(session[:invite_id])
+      if @invite
+        @invite.idea.members.create({:user_id => current_user.id, :can_edit => @invite.can_edit})
+        InviteMailer.accepted(@invite, current_user).deliver
+        @invite.destroy
+        flash[:notice] = "You are now a member of the #{@invite.idea.name} idea.  The one page ideation plan is below."
+        redirect_to idea_sections_path(@invite.idea)
+      end
+    end
+  end
+
+  def get_idea
+    @idea = current_user.ideas.find_by_id(params[:id])
+    redirect_to ideas_path, :flash =>  {:error => "Could not find that idea"} unless @idea
   end
 
   def set_breadcrumbs

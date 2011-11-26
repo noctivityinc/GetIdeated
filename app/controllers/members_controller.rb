@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
-  before_filter :get_idea, :set_breadcrumbs, :except => [:destroy, :list] 
+  before_filter :get_idea, :get_sections, :set_breadcrumbs, :except => [:destroy] 
+  before_filter :authenticate_access!, :except => [:destroy] 
 
   def index
     @members = @idea.members.all
@@ -24,12 +25,10 @@ class MembersController < ApplicationController
 
   def destroy
     @member = Member.find(params[:id])
-    @member.destroy
+    if authenticate_access(@member.idea)
+      @member.destroy
 
-    respond_to do |wants|
-      wants.html {
-        render :partial => 'list', :locals => {:idea => @member.idea}  if request.xhr?
-      }
+      redirect_to idea_members_path(@member.idea), :notice => "#{@member.user.name} has been removed from this idea." 
     end
   end
 
@@ -38,6 +37,23 @@ class MembersController < ApplicationController
   def get_idea
     @idea = Idea.find_by_id(params[:idea_id])
     redirect_to root_url, :notice => "Idea could not be found" unless @idea
+  end
+
+  def get_sections
+    @sections = @idea.sections.all
+  end
+
+  def authenticate_access!
+    authenticate_access(@idea)
+  end
+
+  def authenticate_access(idea)
+    if current_user.authorized_to_edit?(idea)
+      return true
+    else
+      flash[:error] = 'You are not authorized to manage the members for this idea'
+     return redirect_to ideas_path
+    end 
   end
 
   def set_breadcrumbs

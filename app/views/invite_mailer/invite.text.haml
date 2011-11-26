@@ -1,0 +1,20 @@
+Hi,
+\
+= "#{@invite.user.name} would like to get your thoughts about an idea they are working on:"
+\
+= "#{@invite.idea.name}: #{@invite.idea.description}"
+\
+To accept their invitation, please click on the following link:
+\
+= accept_invite_url(@invite.token)
+\
+\
+Happy Ideating,
+\
+\
+= @invite.user.name
+\
+\
+\------------------------------
+powered by GetIdeating.com
+\------------------------------

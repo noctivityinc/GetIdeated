@@ -8,6 +8,6 @@
       = f.input :remember_me, :as => :boolean 
 
     = f.buttons do
-      = f.commit_button "Sign In"
+      = f.commit_button "Sign In", :button_html => {:class => "button big round blue"}
 
 = render :partial => "devise/shared/links"

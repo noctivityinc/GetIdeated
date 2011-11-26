@@ -9,7 +9,8 @@
     = f.input :password, :as => :password, :hint => "(leave blank if you don't want to change it)" 
     = f.input :password_confirmation, :as => :password 
     = f.input :current_password, :as => :password, :hint => "(we need your current password to confirm your changes)"
-  = f.buttons
+  = f.buttons do
+    = f.commit_button 'Update Account', :button_html => {:class => "button big round blue"}
 
 %h3 Cancel my account
 %p

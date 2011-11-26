@@ -2,7 +2,7 @@
 = semantic_form_for [@idea, @invite], :remote => true do |f|
   = f.inputs do 
     = f.input :email
-    = f.input :can_edit, :as => :select, :collection => {'Contributor' => true, 'Viewer' => false }, :include_blank => false  
+    = f.input :can_edit, :label => "Role", :as => :select, :collection => {'Contributor' => true, 'Viewer' => false }, :include_blank => false  
   = f.buttons do
-    %li.cancel.button= link_to "Cancel", '#', :class => "button small cancel"
-    = f.commit_button 'Invite'
+    %li= link_to "Cancel", '#', :class => "cancel button small round dark-blue"
+    = f.commit_button 'Invite', :button_html => {:class => "button big round blue"}

@@ -19,9 +19,12 @@
         #container
           #header
             = link_to image_tag('logo.png'), root_url
-
             #user_nav         
               - if user_signed_in?
+                .top_nav
+                  = link_to "+ New Idea", new_idea_path
+                  = link_to "View Ideas", ideas_path
+
                 Signed in as 
                 = link_to current_user.name, edit_user_registration_path(current_user)
                 \. Not you?
@@ -37,17 +40,19 @@
           #content
             #flash.one
               - flash.each do |name, msg|
-                = content_tag :div, msg, :id => "flash_#{name}"
+                = content_tag :div, msg, :id => "flash_#{name}", :class => "flash_message" 
+                
+            - if show_title? 
+              #page_header.one
+                .titles
+                  - if show_title?
+                    %h1.title= yield(:title)
 
-            #page_header.one
-              .titles
-                - if show_title?
-                  %h1.title= yield(:title)
+                  - if show_subtitle?
+                    %h3.subtitle= yield(:subtitle)
 
-                - if show_subtitle?
-                  %h3.subtitle= yield(:subtitle)
-              .placeholder
-                = yield(:placeholder)
+                .placeholder
+                  = yield(:placeholder)
 
             .one
               = yield

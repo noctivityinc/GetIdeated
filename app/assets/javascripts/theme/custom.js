@@ -1,32 +1,23 @@
-/***************************************************
-  SMALL SLIDER WITH CONTENT 
-***************************************************/
-/*-----------------------------------------FONT STYLER ENDS--------------------------------*/
-jQuery.noConflict()(function($) {
-    jQuery("#slider-small").slides({
+$(function() {
+    $("#slider-small").slides({
         preload: true,
         effect: 'fade',
         fadeSpeed: 550,
         play: 5000
 
     });
-});
-/***************************************************
-  SLIDER  NAV FADE OUT & FADE IN
-***************************************************/
-jQuery.noConflict()(function($) {
-    $(document).ready(function() {
-        if (jQuery().slides) {
-            jQuery("#slides").hover(function() {
-                jQuery('.slides-nav').fadeIn(400);
-            }, function() {
-                jQuery('.slides-nav').fadeOut(400);
-            });
 
-        }
-    });
-}); /*-----------------SLIDES WITH CAPTION---------------*/
-jQuery.noConflict()(function($) {
+    $('#menu').tabify()
+
+    if (jQuery().slides) {
+        jQuery("#slides").hover(function() {
+            jQuery('.slides-nav').fadeIn(400);
+        }, function() {
+            jQuery('.slides-nav').fadeOut(400);
+        });
+
+    }
+
     $(function() {
         $('#slides').slides({
             effect: 'fade',
@@ -59,40 +50,20 @@ jQuery.noConflict()(function($) {
             }
         });
     });
-});
-/***************************************************
-          TABIFY 
-***************************************************/
-jQuery.noConflict()(function($) {
-    $(document).ready(function() {
-        $(document).ready(function() {
-            $('#menu').tabify()
 
-        });
+    $(".tweet").tweet({
+        username: "trendywebstar",
+        /*CHANGE trendyWebStar WITH YOUR OWN USERNAME*/
+        join_text: null,
+        avatar_size: null,
+        /*AVATAR*/
+        count: 1,
+        /*NUMBER OF TWEETS*/
+        auto_join_text_default: "we said,",
+        auto_join_text_ed: "we",
+        auto_join_text_ing: "we were",
+        auto_join_text_reply: "we replied to",
+        auto_join_text_url: "we were checking out",
+        loading_text: "loading tweets..."
     });
 });
-
-/***************************************************
-    TWITTER FEEDS
-***************************************************/
-jQuery.noConflict()(function($) {
-    $(document).ready(function() {
-        $(".tweet").tweet({
-            username: "trendywebstar",
-            /*CHANGE trendyWebStar WITH YOUR OWN USERNAME*/
-            join_text: null,
-            avatar_size: null,
-            /*AVATAR*/
-            count: 1,
-            /*NUMBER OF TWEETS*/
-            auto_join_text_default: "we said,",
-            auto_join_text_ed: "we",
-            auto_join_text_ing: "we were",
-            auto_join_text_reply: "we replied to",
-            auto_join_text_url: "we were checking out",
-            loading_text: "loading tweets..."
-        });
-    });
-});
-
-

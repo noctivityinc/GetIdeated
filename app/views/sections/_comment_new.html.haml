@@ -1,6 +1,6 @@
 .comment
   .icon
-    = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name)
+    = gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), :alt => current_user.name, :gravatar => { :default => :identicon })
   .col
     %b Leave a comment...
     .text

@@ -1,6 +1,9 @@
 class Member < ActiveRecord::Base
   attr_accessible :user_id, :idea_id, :can_edit, :notification_version, :notification_comment, :weekly_status 
 
+  after_create :send_added_email
+  after_destroy :send_removed_email
+
   belongs_to :idea
   belongs_to :user
 
@@ -16,6 +19,16 @@ class Member < ActiveRecord::Base
     else
       "Viewer"
     end
+  end
+
+  private
+
+  def send_added_email
+    MemberMailer.added(self).deliver
+  end
+
+  def send_removed_email
+    MemberMailer.removed(self).deliver
   end
 
 end

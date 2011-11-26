@@ -1,7 +1,7 @@
 .members
   .member
     overflow: hidden
-    height: 24px
+    height: 32px
     
     .col.name
       float: left
@@ -9,13 +9,15 @@
 
     .col.status, .col.remove, .col.block
       float: right
-      margin: 0px 5px
+      margin: 0px 10px
       width: 50px
       text-align: center
       display: block
+      padding-top: 3px
 
-    
-  
+      &.owner
+        font-weight: bold
+
   #invitations
     .invite
       overflow: hidden
@@ -30,10 +32,10 @@
         font-size: 10px
         margin-left: 15px
 
-      .col.uninvite
+      .col.uninvite, .col.resend
         float: right
+        margin-left: 10px
         
 .new_invite
   margin-top: 20px
   padding-top: 10px
-  border-top: 1px solid #F0F0F0

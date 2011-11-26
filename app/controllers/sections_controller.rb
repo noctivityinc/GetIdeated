@@ -22,10 +22,12 @@ class SectionsController < ApplicationController
 
   def create
     @section = @idea.sections.new(params[:section])
-    if @section.save
-      redirect_to @section, :notice => "Successfully created section."
-    else
-      render :action => 'new'
+    if authenticate_access(@section.idea)
+      if @section.save
+        redirect_to @section, :notice => "Successfully created section."
+      else
+        render :action => 'new'
+      end
     end
   end
 
@@ -35,24 +37,28 @@ class SectionsController < ApplicationController
 
   def update
     @section = Section.find(params[:id])
-    @section.user = current_user
-    @section.update_attributes(params[:section])
+    if authenticate_access(@section.idea)
+      @section.user = current_user
+      @section.update_attributes(params[:section])
 
-    # needed for left nav
-    @sections = @section.idea.sections.all   
+      # needed for left nav
+      @sections = @section.idea.sections.all   
 
-    respond_to do |wants|
-      wants.html {
-        render :json => {:section => render_to_string(@section), :left_nav => render_to_string(:partial => 'layouts/left_nav')} if request.xhr?
-      }
-      wants.js  { render @section }
+      respond_to do |wants|
+        wants.html {
+          render :json => {:section => render_to_string(@section), :left_nav => render_to_string(:partial => 'layouts/left_nav')} if request.xhr?
+        }
+        wants.js  { render @section }
+      end
     end
   end
 
   def destroy
     @section = Section.find(params[:id])
-    @section.destroy
-    redirect_to sections_url, :notice => "Successfully destroyed section."
+    if authenticate_access(@section.idea)
+      @section.destroy
+      redirect_to sections_url, :notice => "Successfully destroyed section."
+    end
   end
 
   private
@@ -60,6 +66,19 @@ class SectionsController < ApplicationController
   def get_idea
     @idea = Idea.find_by_id(params[:idea_id])
     redirect_to root_url, :notice => "Idea could not be found" unless @idea
+  end
+
+  def authenticate_access!
+    authenticate_access(@idea)
+  end
+
+  def authenticate_access(idea)
+    if current_user.authorized_to_edit?(idea)
+      return true
+    else
+      flash[:error] = 'You are not authorized to edit the plan for this idea'
+     return redirect_to ideas_path
+    end 
   end
 
   def add_idea_crumbs(idea)

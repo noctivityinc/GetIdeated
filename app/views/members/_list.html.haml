@@ -3,13 +3,13 @@
 - @members.each do |member|
   .member
     .col.name= member.user.name
-    - unless member.is_owner?
+    - if !member.is_owner? || member.user == current_user
       .col.remove
-        = link_to "remove", member, :class => "remove button small"
+        = link_to "remove", member, :method => :delete, :class => "remove button red small", :confirm => "Are you sure you want to remove this user from the idea?" 
     - else
       .col.block
         &nbsp;
-    .col.status{:class => "rounded small #{member.is_owner? ? 'green' : ''}"}= member.status
+    .col.status{:class => "#{member.is_owner? ? 'owner' : ''}"}= member.status
 
 - unless @invitations.empty?
   #invitations
@@ -21,4 +21,6 @@
           invited On
           = invite.created_at.strftime('%Y-%m-%d')
         .col.uninvite
-          = link_to "uninvite", invite, :class => "uninvite button small"
+          = link_to "uninvite", invite, :method => :delete, :class => "uninvite button red small", :confirm => "Are you sure you want to uninvite this user?" 
+        .col.resend
+          = link_to "resend", resend_invite_path(invite), :class => "resend button dark-blue small"

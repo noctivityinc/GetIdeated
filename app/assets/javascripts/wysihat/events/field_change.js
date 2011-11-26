@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function($) {
   function fieldChangeHandler(event, element) {
     var $element = $(element);
 

@@ -35,9 +35,18 @@
   margin-bottom: 15px
   font-size: 10px
 
+  .top_nav
+    float: left
+    margin-right: 40px
+    a
+      display: inline
+      margin-right: 10px
+
+
 #flash
   display: block
   clear: both
+  overflow: hidden
 
 #flash_notice,
 #flash_error,
@@ -47,19 +56,20 @@
   border: 1px solid #ddd
 
 #flash_notice
-  background: #e6efc2
+  background: #e6efc2 image-url('theme/cancel.png') 925px center no-repeat
   color: #264409
   border-color: #c6d880
 
 #flash_error
-  background: #fbe3e4
+  background-color: #fbe3e4 image-url('theme/cancel.png') 925px center no-repeat
   border-color: #fbc2c4
   color: #e64135
 
 #flash_alert
-  background: #fff6bf
+  background: #fff6bf image-url('theme/cancel.png') 925px center no-repeat
   color: #514721
   border-color: #ffd324
+
 
 .fieldWithErrors
   display: inline

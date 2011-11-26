@@ -1,3 +1,5 @@
+- idea = @sections.first.idea
+
 #left_nav
   %ul.simple-nav
     - @sections.each do |section|
@@ -11,3 +13,14 @@
             %span.ui-icon.ui-icon-document{:title => pluralize(section.versions.count, 'version'), 'data-href' => section_versions_path(section)}
 
   = link_to "One Page Plan", idea_sections_path(@sections.first.idea), :class => 'button small round light-blue'
+
+  .member_list
+    %h5 Members
+    %ul.simple-nav
+      - idea.members.each do |member|
+        %li
+          = member.user.name
+          - if member.is_owner?
+            = " (Owner)"
+      - if idea.owner == current_user
+        %li= link_to "+ Invite", idea_members_path(idea)
