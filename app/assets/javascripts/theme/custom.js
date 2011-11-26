@@ -52,7 +52,7 @@ $(function() {
     });
 
     $(".tweet").tweet({
-        username: "trendywebstar",
+        username: "getideated",
         /*CHANGE trendyWebStar WITH YOUR OWN USERNAME*/
         join_text: null,
         avatar_size: null,

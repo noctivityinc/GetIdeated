@@ -17,6 +17,8 @@ class MemberMailer < ActionMailer::Base
   #   en.member_mailer.removed.subject
   #
   def removed(member)
+    return unless member.idea.owner         # => prevents sending when idea is deleted
+
     @member = member
     mail(:to => member.user.email, :subject => "You have been removed from the \"#{member.idea.name}\" idea", :tag => 'member-removed')  
   end

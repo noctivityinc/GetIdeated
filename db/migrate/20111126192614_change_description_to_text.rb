@@ -1,28 +1,8 @@
-class Idea < ActiveRecord::Base
-  attr_accessible :name, :user_id, :state_id, :description
+class ChangeDescriptionToText < ActiveRecord::Migration
+  def change
+    change_column :sections, :description, :text
 
-  belongs_to :user
-  has_many :sections, :dependent => :destroy
-  has_many :comments, :as => :commentable, :dependent => :destroy 
-  has_many :members, :dependent => :destroy 
-  has_many :invites, :dependent => :destroy 
-
-  after_create :create_sections, :add_as_member
-
-  def state
-    State.find(self.state_id).name
-  end
-
-  def owner
-    o = self.members.detect {|x| x.is_owner?}
-    return o.user if o
-  end
-
-  private
-
-  def create_sections
-    self.sections.create({:name => "Vision", :position => 1, 
-:description => 'The vision is a short, easy to understand statement that should describe your idealized 
+    Section.where(:name => "Vision").update_all(:description => 'The vision is a short, easy to understand statement that should describe your idealized 
 perception of what your business will look to others.  
 
 In summary it answers the question, "Where do we want to go?"
@@ -49,10 +29,9 @@ bq. "We bring the good things to Life"
 
 *Microsoft*
 
-bq. "To enable people and businesses throughout the world realise their potential"'})
+bq. "To enable people and businesses throughout the world realise their potential"')
 
-    self.sections.create({:name => "Mission", :position => 2, 
-:description => 'The mission defines the purpose of the venture.  What your business will do, 
+Section.where(:name => "Mission").update_all(:description => 'The mission defines the purpose of the venture.  What your business will do, 
 it''s market niche, growth plans, unique value prop.
 
 The difference between a mission statement and a vision statement is that a mission statement focuses on a company''s present state while a vision statement focuses on a company''s future. 
@@ -71,10 +50,9 @@ bq. Google''s mission is to organize the world''s information and make it univer
 
 *YouTube*
 
-bq. YouTube''s mission is to provide fast and easy video access and the ability to share videos frequently'})
+bq. YouTube''s mission is to provide fast and easy video access and the ability to share videos frequently')
     
-    self.sections.create({:name => "Objectives", :position => 3, 
-:description => '*Examples*
+Section.where(:name => "Objectives").update_all(:description => '*Examples*
 
 * First year revenue $1,900,000.
 * Achieve profit before tax of $XXX,XXXX for year ending 12/31/XX.
@@ -82,9 +60,9 @@ bq. YouTube''s mission is to provide fast and easy video access and the ability 
 * Sign up 100 beta test customers by end of Q4.
 * Introduce new internet product by Mar 31; achieve Q2 sales of $25m, Q3 $50m, Q4 $85m
 * Increase sales per employee from $250,000 to $300,000.
-* Reduce Accounts Receivable from 60 days to 45 days by 6/30/XX.'})
+* Reduce Accounts Receivable from 60 days to 45 days by 6/30/XX.')
 
-    self.sections.create({:name => "Strategies", :position => 4, 
+Section.where(:name => "Strategies").update_all(
 :description => '*Examples*
 
 * Partners: Align with industry leader, partner for marketing & solution development.
@@ -93,8 +71,9 @@ bq. YouTube''s mission is to provide fast and easy video access and the ability 
 * R&D: Workflow solutions, open systems, multi-platform, object-oriented, flexible.
 * Develop Employee Incentive Programs to allow the team to share in the rewards.
 
-'})
-    self.sections.create({:name => "Plans", :position => 5, 
+')
+
+Section.where(:name => "Plans").update_all(
 :description => '*Examples*
 
 * Develop operating budget and plans for capital needs for the business by 1/1/XX.
@@ -105,10 +84,6 @@ bq. YouTube''s mission is to provide fast and easy video access and the ability 
 * Implement Power Partner Initiatives w/Google and Facebook by 2/28.
 * Complete beta test of new site by 04/15.
 * Launch social media program by 07/31.
-* Complete facilities upgrades in Dallas by 08/31, London by 10/31.'})
-  end
-
-  def add_as_member
-    self.members.create({:user_id => self.user_id, :can_edit => true})
+* Complete facilities upgrades in Dallas by 08/31, London by 10/31.')
   end
 end

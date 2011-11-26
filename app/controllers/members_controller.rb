@@ -27,6 +27,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     if authenticate_access(@member.idea)
       @member.destroy
+      MemberMailer.removed(@member).deliver 
 
       redirect_to idea_members_path(@member.idea), :notice => "#{@member.user.name} has been removed from this idea." 
     end

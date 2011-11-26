@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122023027) do
+ActiveRecord::Schema.define(:version => 20111126192614) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20111122023027) do
   create_table "sections", :force => true do |t|
     t.string   "name"
     t.integer  "idea_id"
-    t.string   "description"
+    t.text     "description", :limit => 255
     t.boolean  "locked"
     t.datetime "created_at"
     t.datetime "updated_at"
