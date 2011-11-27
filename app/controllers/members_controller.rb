@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_idea, :get_sections, :set_breadcrumbs, :except => [:destroy] 
   before_filter :authenticate_access!, :except => [:destroy] 
 

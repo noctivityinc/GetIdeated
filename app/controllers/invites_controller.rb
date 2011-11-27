@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_idea, :only => [:new, :create]
   layout :false
 

@@ -1,4 +1,5 @@
 class VersionsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_section, :set_breadcrumbs
 
   def index
@@ -29,8 +30,8 @@ class VersionsController < ApplicationController
       @section = @version.section if @version
     end
 
-    @sections = @section.idea.sections.all
-    redirect_to root_url, :notice => "Section could not be found" unless @section
+    @sections = @section.idea.sections.all if @section
+    redirect_to idea_path, :notice => "Section could not be found" unless @section
   end
 
   def set_breadcrumbs

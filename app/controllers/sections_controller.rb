@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_idea, :only => [:index, :new, :create]
 
   def index
