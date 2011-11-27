@@ -4,18 +4,8 @@
     = link_to image_tag("logo-bottom.png"), root_url, :id => "copyright-logo" 
     .right
       %p
-        %a{:href => "#"} Home
+        %a{:href => "/"} Home
         \/
-        %a{:href => "#"} Features
-        \/
-        %a{:href => "#"} Pages
-        \/
-        %a{:href => "#"} Portfolio
-        \/
-        %a{:href => "#"} Blog
-        \/
-        %a{:href => "#"} Typography & Columns
-        \/
-        %a{:href => "#"} Contact
+        = link_to "Contact Us", 'mailto:webmaster@getideated.com'
       %span
         © Copyright 2011 Noctivity Inc. All rights reserved. 

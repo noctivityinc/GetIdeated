@@ -5,7 +5,7 @@ Ideation::Application.routes.draw do
   devise_for :users
 
   resources :ideas do
-    resources :sections, :except => [:new, :edit], :shallow=>true do
+    resources :sections, :shallow=>true do
       resources :versions, :only => [:index],  :shallow=>true do 
         member do
           get 'revert'

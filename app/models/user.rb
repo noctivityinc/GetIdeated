@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     return member && member.can_edit
   end
 
+  def owns?(idea)
+    member = idea.members.detect {|x| x.user == self}
+    return member && member.is_owner?
+  end
+
   private
 
   def send_welcome_mail

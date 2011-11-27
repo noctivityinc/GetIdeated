@@ -1,20 +1,6 @@
-= form_for @section do |f|
-  = f.error_messages
-  %p
-    = f.label :name
-    %br
-    = f.text_field :name
-  %p
-    = f.label :idea_id
-    %br
-    = f.number_field :idea_id
-  %p
-    = f.label :description
-    %br
-    = f.text_field :description
-  %p
-    = f.label :locked
-    %br
-    = f.check_box :locked
-  %p
-    = f.submit
+= semantic_form_for [@idea, @section] do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :description, :hint => "This will help others understand the purpose of this section so keep it short and to the point.  You might also want to provide examples." 
+  = f.buttons do
+    = f.commit_button :button_html => {:class => "button big round blue"}

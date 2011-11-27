@@ -13,13 +13,13 @@ jQuery(document).ready(function($) {
     var $section = $(this).closest('.section');
     var $description = $section.find('.description');
     $description.toggle('fast', function(){
-      $self.text($description.is(':visible') ? 'Hide Help ' : 'Show Help');   
+      $self.text($description.is(':visible') ? 'Hide Examples ' : 'Show Examples');   
     });
   });
 
   $('.section .description').each(function() {
     var $section = $(this).closest('.section');
-    $section.find('a.show_description').text($(this).is(':visible') ? 'Hide Help ' : 'Show Help'); 
+    $section.find('a.show_description').text($(this).is(':visible') ? 'Hide Examples ' : 'Show Examples'); 
   });
 
   $('#new_comment').live('ajax:success', function(evt, data, status, xhr) {

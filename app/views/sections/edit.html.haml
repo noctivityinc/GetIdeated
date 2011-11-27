@@ -1,8 +1,7 @@
-- title "Edit Section"
+- title "Edit #{@section.name} Section"
 
-= render 'form'
+.one-fourth
+  = render 'layouts/left_nav'
 
-%p
-  = link_to "Show", @section
-  |
-  = link_to "View All", sections_path
+.inner-content.last   
+  = render 'form'

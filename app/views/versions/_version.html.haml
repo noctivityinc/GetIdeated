@@ -7,4 +7,4 @@
       .revert= link_to "revert", revert_version_path(version), :confirm => "Are you sure you want to revert to this version?"
     .name= version.user.name
     .date= version.updated_at
-    .text= version.content.html_safe
+    .text= version.content.blank? ? '(content removed)' : version.content.html_safe

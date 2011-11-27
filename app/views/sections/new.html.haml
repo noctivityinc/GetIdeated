@@ -1,5 +1,15 @@
-- title "New Section"
+- title "Add Custom Section"
 
-= render 'form'
+.one-fourth
+  = render 'layouts/left_nav'
 
-%p= link_to "Back to List", sections_path
+.inner-content.last   
+
+  %p
+    Use the following form to add a custom section to your ideation plan.  A custom section 
+    can be anything you want to make sure to focus on, such as a SWOT analysis, possible 
+    business names, possible locations, people, etc.
+
+  = render 'form'
+
+

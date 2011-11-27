@@ -17,9 +17,10 @@ jQuery(document).ready(function($) {
 
     });
 
-    $('.section form').live('ajax:before', function(evt, data, status, xhr) {
-        var val = $(this).find('textarea').val();
-        return val != '';
+    $('.section form').live('ajax:loading', function() {
+        var val = $(this).find('#section[content]').val();
+        console.log($(this).find('input[type=submit]'))
+        $(this).find('input[type=submit]').attr('disabled','true');
     }).live('ajax:success', function(evt, data, status, xhr) {
         var $section = $(this).closest('.section');
         var res = $.parseJSON(data);
@@ -53,6 +54,7 @@ jQuery(document).ready(function($) {
         
         setHiddenFields();
         createQips();
+        $('.section_controls').show();
     }
 
     function resetSection($section) {
@@ -76,6 +78,8 @@ jQuery(document).ready(function($) {
                     editor.html('');
                 }
 
+                $('.section_controls').hide();
+
                 var toolbar = new WysiHat.Toolbar(editor);
                 toolbar.initialize(editor);
 
@@ -95,9 +99,8 @@ jQuery(document).ready(function($) {
                 $secondary.show(100, function() {
                     $(self).prev().focus();
                     createQips();
-                    // remove qtip
+                    // remove this qtip
                     editor.qtip('destroy');
-
                 });
             });
         });

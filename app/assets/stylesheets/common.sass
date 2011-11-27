@@ -6,6 +6,12 @@
       li
         overflow: hidden
         
+        &.all_sections
+          border-bottom: 1px solid gray
+
+        &.add_section, &.invite
+          border-top: 1px solid gray        
+
         .nav_stats
           float: right
           width: 40px
@@ -37,10 +43,18 @@
         float: right
         margin-left: 15px
 
-    .controls
+    .description
+      display: none
+      &.wizard
+        display: block
+
+    .controls, .section_controls
       float: right
       font-size: 10px
 
+      a
+        margin-left: 15px
+    
     .version, form
       width: 100%
       margin: 5px 0px 10px 0px

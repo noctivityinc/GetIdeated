@@ -2,6 +2,8 @@
 
 #left_nav
   %ul.simple-nav
+    %li.all_sections
+      = link_to "All Sections", idea_sections_path(@sections.first.idea), :class => "#{controller.action_name == 'index' ? 'on' : ''}"
     - @sections.each do |section|
       %li
         - if section == @section && !(params[:body_action] == 'index')
@@ -11,8 +13,9 @@
           .nav_stats
             %span.ui-icon.ui-icon-comment{:title => pluralize(section.comments.count, 'comment'), 'data-href' => section_path(section)}
             %span.ui-icon.ui-icon-document{:title => pluralize(section.versions.count, 'version'), 'data-href' => section_versions_path(section)}
-
-  = link_to "One Page Plan", idea_sections_path(@sections.first.idea), :class => 'button small round light-blue'
+    - if current_user.owns?(idea)
+      %li.add_section
+        = link_to "+ Add Custom Section", new_idea_section_path(idea)
 
   .member_list
     %h5 Members
@@ -23,4 +26,5 @@
           - if member.is_owner?
             = " (Owner)"
       - if idea.owner == current_user
-        %li= link_to "+ Invite", idea_members_path(idea)
+        %li.invite
+          = link_to "+ Invite", idea_members_path(idea)
