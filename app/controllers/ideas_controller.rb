@@ -3,8 +3,6 @@ class IdeasController < ApplicationController
   before_filter :check_for_invitations
   before_filter :get_idea, :except => [:index, :new, :create, :public ] 
 
-  layout :false, :only => :public 
-
   def index
     @ideas = current_user.ideas.all
     if @ideas.empty?
@@ -18,6 +16,7 @@ class IdeasController < ApplicationController
   def public
     @idea = Idea.find_by_token(params[:token])
     redirect_to ideas_path, :flash =>  {:error => "Could not find that idea, sorry."} unless @idea
+    render :public, :layout => false
   end
 
   def new
