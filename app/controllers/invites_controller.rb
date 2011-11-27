@@ -11,8 +11,9 @@ class InvitesController < ApplicationController
     @invite.user = current_user
     respond_to do |wants|
       if added_member || @invite.save
+        @sections = @idea.sections.all
         wants.html {
-          render :partial => 'members/list', :locals => {:idea => @idea}  if request.xhr?
+          render :json => {:list => render_to_string(:partial => 'members/list', :locals => {:idea => @idea}), :left_nav => render_to_string(:partial => 'layouts/left_nav')} if request.xhr?
         }
       else
         wants.html {

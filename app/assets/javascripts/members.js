@@ -7,7 +7,10 @@ jQuery(document).ready(function($) {
   $('.members .member:odd').css('background-color', '#f0f0f0');
 
   $('.new_invite form').live('ajax:success', function(evt, data, status) {
-    $('.list').html(data);
+    var res = $.parseJSON(data);
+
+    $('#left_nav').html(res.left_nav)
+    $('.list').html(res.list);
     $('#invitations .invite:first').effect("highlight", {}, 1500);
     $('.new_invite').html('');
   }).live('ajax:complete', function(evt, data, status) {

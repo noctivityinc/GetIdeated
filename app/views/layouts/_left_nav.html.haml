@@ -18,13 +18,18 @@
         = link_to "+ Add Custom Section", new_idea_section_path(idea)
 
   .member_list
-    %h5 Members
+    %h5= link_to "Members", idea_members_path(idea)
     %ul.simple-nav
       - idea.members.each do |member|
         %li
           = member.user.name
           - if member.is_owner?
             = " (Owner)"
+      - idea.invites.each do |invite|
+        %li
+          = "#{invite.email} - invited #{invite.created_at.strftime('%Y-%m-%d')}"
       - if idea.owner == current_user
         %li.invite
           = link_to "+ Invite", idea_members_path(idea)
+
+  
