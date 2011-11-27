@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
   has_many :members, :dependent => :destroy 
   has_many :invites, :dependent => :destroy 
 
+  before_save :generate_token
   after_create :create_sections, :add_as_member
 
   def state
@@ -19,6 +20,10 @@ class Idea < ActiveRecord::Base
   end
 
   private
+
+  def generate_token
+    self.token = SecureRandom.hex(4)
+  end
 
   def create_sections
     self.sections.create({:name => "Vision", :position => 1, 
