@@ -1,7 +1,9 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :public 
   before_filter :check_for_invitations
-  before_filter :get_idea, :except => [:index, :new, :create] 
+  before_filter :get_idea, :except => [:index, :new, :create, :public ] 
+
+  layout :false, :only => :public 
 
   def index
     @ideas = current_user.ideas.all
@@ -11,6 +13,11 @@ class IdeasController < ApplicationController
   end
 
   def show
+  end
+
+  def public
+    @idea = Idea.find_by_token(params[:token])
+    redirect_to ideas_path, :flash =>  {:error => "Could not find that idea, sorry."} unless @idea
   end
 
   def new
@@ -52,6 +59,7 @@ class IdeasController < ApplicationController
         @invite.idea.members.create({:user_id => current_user.id, :can_edit => @invite.can_edit})
         InviteMailer.accepted(@invite, current_user).deliver
         @invite.destroy
+        session[:invite_id] = nil
         flash[:notice] = "You are now a member of the #{@invite.idea.name} idea.  The one page ideation plan is below."
         redirect_to idea_sections_path(@invite.idea)
       end

@@ -17,7 +17,8 @@
       %li.add_section
         = link_to "+ Add Custom Section", new_idea_section_path(idea)
 
-  .member_list
+  .member_list.nav_item
+    %div{:class => "ui-icon ui-icon-person", }
     %h5= link_to "Members", idea_members_path(idea)
     %ul.simple-nav
       - idea.members.each do |member|
@@ -32,4 +33,15 @@
         %li.invite
           = link_to "+ Invite", idea_members_path(idea)
 
+
+  .nav_item
+    %div{:class => "ui-icon ui-icon-star", }
+    %h5= link_to "Private URL", '#', :title => "Anyone with this URL can view your plan.  Share it with investors, partners, clients, whoever." 
+
+    .share{:title => "Click to copy to clipboard"}= public_url(idea.token)
+
+  .nav_item
+    %div{:class => "ui-icon ui-icon-gear", }
+    %h5= link_to "Idea Settings", edit_idea_path(idea)
+  
   

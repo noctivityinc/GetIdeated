@@ -54,6 +54,19 @@ jQuery(document).ready(function($) {
         
         setHiddenFields();
         createQips();
+
+        $('#left_nav .share').zclip({
+            path: '/ZeroClipboard.swf',
+            copy: $('#left_nav .share').text(),
+            afterCopy:function(){
+                var link = $(this).text();
+                $(this).text('Copied to clipboard');
+                $(this).effect("highlight", {}, 3000, function() {
+                    $(this).text(link);
+                });
+            }
+        });
+
         $('.section_controls').show();
     }
 
@@ -121,7 +134,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-        $('div[title]').qtip({
+        $('div[title], a[title]').qtip({
             position: {
                 my: 'top center',
                 at: 'bottom center'

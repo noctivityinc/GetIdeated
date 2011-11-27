@@ -2,6 +2,7 @@ Ideation::Application.routes.draw do
 
   match '/examples' => 'examples#index'
   match '/user' => "ideas#index", :as => :user_root
+  match '/idea/:token' => "ideas#public", :as => :public
   devise_for :users
 
   resources :ideas do

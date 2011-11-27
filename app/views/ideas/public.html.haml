@@ -1,0 +1,40 @@
+!!!
+%html
+
+  %head
+    %title
+      = @idea.name 
+      = " | GetIdeated.com | Focus. Plan. Dream. Do."
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    %link{:href => "/favicon.png", :rel => "shortcut icon", :type => "image/gif"}
+    = render 'layouts/head'
+    = stylesheet_link_tag "application"
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield(:head)
+    
+
+  %body{:class => "ideas public"}     
+    #header
+      = link_to image_tag('logo-small.png'), root_url
+      #user_nav         
+        %p= link_to "Start planning your ideas now!", new_user_registration_path, :class => "button small green round" 
+
+    #wrapper
+      .center
+        #container
+          #content
+            .titles
+              %h1.title= @idea.name
+              %h3= @idea.description
+              %h6
+                = "for more information, contact "
+                = mail_to @idea.owner.email, @idea.owner.name
+            
+            .horizontal-line
+
+            .one
+              - @idea.sections.each do |section|
+                .section
+                  %h5= section.name
+                  .text= section.content.nil? ? '' : section.content.html_safe

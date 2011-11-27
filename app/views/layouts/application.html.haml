@@ -3,7 +3,8 @@
 
   %head
     %title
-      = yield(:title) || "Get Ideated.com | Focus. Plan. Dream. Do."
+      = yield(:title) + " | "
+      = "GetIdeated.com | Focus. Plan. Dream. Do."
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %link{:href => "/favicon.png", :rel => "shortcut icon", :type => "image/gif"}
     = render 'layouts/head'
