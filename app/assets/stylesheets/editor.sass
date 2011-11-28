@@ -17,12 +17,17 @@
   min-height: 50px
   margin: 5px 0
   padding: 5px
-  border: 1px solid #acacac
+  border: none
   outline: none
   font-family: 'Lucida Grande', verdana, arial, sans-serif
   font-size: 12px
+  cursor: pointer
   p
     margin: 0
+
+  &.active
+    border: 1px solid #acacac
+    cursor: text
 
 .editor_toolbar
   .button

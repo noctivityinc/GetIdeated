@@ -83,6 +83,7 @@ jQuery(document).ready(function($) {
 
         $section.find('form .editor').each(function() {
             var editor = WysiHat.Editor.init($(this));
+            editor.removeClass('active');
 
             editor.click(function(e) {
                 e.preventDefault();
@@ -98,6 +99,8 @@ jQuery(document).ready(function($) {
                     editor.next().val('');
                     editor.html('');
                 }
+
+                editor.addClass('active');
 
                 $('.section_controls').hide();
 
