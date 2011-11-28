@@ -17,7 +17,7 @@
   - if current_user.authorized_to_edit?(section.idea)
     = form_for section, :remote => true, :html => {'data-version-list' => url_for(section_versions_path(section))} do |f|
       = hidden_field_tag 'body_action', 'action', :class => "body_action"     
-      .editor{:contenteditable => "true", :id => "section_content#{section.id}", 'data-field-name' => "section[content]", :placeholder => current_user.authorized_to_edit?(section.idea) ? "Click to edit the #{section.name}" : "(section blank)"}= section.content.nil? ? 'Click to edit this section' : section.content.html_safe
+      .editor{:contenteditable => "true", :id => "section_content#{section.id}", 'data-field-name' => "section[content]"}= section.content.nil? ? (current_user.authorized_to_edit?(section.idea) ? "Click to edit this section" : "(section blank)") : section.content.html_safe
 
       .secondary{:style => "display: #{wizard? && edit_mode ? 'block' : 'none'}"}
         .minor 

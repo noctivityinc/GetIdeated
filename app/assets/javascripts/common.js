@@ -16,17 +16,20 @@ jQuery(document).ready(function($) {
     $('.section .cancel').live('click', function(e) {
         e.preventDefault();
 
-        reset($(this).closest('.section'));
-        $(this).closest('.section').find('.editor_toolbar').remove().end().find('.section_content').show();
+        var $section = $(this).closest('.section');
+        var $editor = $section.find('.editor');
 
-        $('.button:first').focus();
+        if ($editor.html().length === 0) { $editor.html('Click to edit this section'); }
+        reset($section);
+        $section.find('.editor_toolbar').remove().end().find('.section_content').show();
 
+        $section.find('.name a').focus().blur();
     });
 
     $('.section form').live('ajax:loading', function() {
         var val = $(this).find('#section[content]').val();
         console.log($(this).find('input[type=submit]'))
-        $(this).find('input[type=submit]').attr('disabled','true');
+        $(this).find('input[type=submit]').attr('disabled', 'true');
     }).live('ajax:success', function(evt, data, status, xhr) {
         var $section = $(this).closest('.section');
         var res = $.parseJSON(data);
@@ -48,11 +51,11 @@ jQuery(document).ready(function($) {
 
     });
 
-    function setupShareCopy () {
+    function setupShareCopy() {
         $('#left_nav .share').zclip({
             path: '/ZeroClipboard.swf',
             copy: $('#left_nav .share').text(),
-            afterCopy:function(){
+            afterCopy: function() {
                 var link = $(this).text();
                 $(this).text('Copied to clipboard');
                 $(this).effect("highlight", {}, 3000, function() {
@@ -63,15 +66,15 @@ jQuery(document).ready(function($) {
     }
 
     function reset($section) {
-        if($section===undefined) {
+        if ($section === undefined) {
             $('.section').each(function(ndx, section) {
                 var $section = $(section);
                 resetSection($section);
-            });    
+            });
         } else {
-            resetSection($section);    
+            resetSection($section);
         }
-        
+
         setHiddenFields();
         createQips();
 
@@ -91,11 +94,10 @@ jQuery(document).ready(function($) {
                 var $secondary = $section.find('.secondary');
 
                 if ($secondary.is(':visible')) {
-                    console.log('visible');
                     return true
                 };
 
-                if(editor.html() == 'Click to edit this section') {
+                if (editor.html() == 'Click to edit this section') {
                     editor.next().val('');
                     editor.html('');
                 }
