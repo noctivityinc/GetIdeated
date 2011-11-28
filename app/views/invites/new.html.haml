@@ -3,6 +3,7 @@
   = f.inputs do 
     = f.input :email
     = f.input :can_edit, :label => "Role", :as => :select, :collection => {'Contributor' => true, 'Viewer' => false }, :include_blank => false  
+    = f.input :message, :label => "(Optional) Message", :input_html => {:maxlength => "500"}
   = f.buttons do
     %li= link_to "Cancel", '#', :class => "cancel button small round dark-blue"
     = f.commit_button 'Invite', :button_html => {:class => "button big round blue"}

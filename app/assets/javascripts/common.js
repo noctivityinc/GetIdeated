@@ -1,6 +1,12 @@
 jQuery(document).ready(function($) {
 
     reset();
+    setupShareCopy();
+
+    $('body').live('updateNav', function(event, html) {
+        $('#left_nav').html(html)
+        setupShareCopy();
+    });
 
     $('#flash').click(function(e) {
         e.preventDefault();
@@ -25,7 +31,7 @@ jQuery(document).ready(function($) {
         var $section = $(this).closest('.section');
         var res = $.parseJSON(data);
 
-        $('#left_nav').html(res.left_nav)
+        $('body').trigger('updateNav', res.left_nav);
         $section.html(res.section).find('.saved').show().end().effect("highlight", {}, 1500, function() {
             reset($section);
             $section.find('.saved').fadeOut('slow');
@@ -42,6 +48,20 @@ jQuery(document).ready(function($) {
 
     });
 
+    function setupShareCopy () {
+        $('#left_nav .share').zclip({
+            path: '/ZeroClipboard.swf',
+            copy: $('#left_nav .share').text(),
+            afterCopy:function(){
+                var link = $(this).text();
+                $(this).text('Copied to clipboard');
+                $(this).effect("highlight", {}, 3000, function() {
+                    $(this).text(link);
+                });
+            }
+        });
+    }
+
     function reset($section) {
         if($section===undefined) {
             $('.section').each(function(ndx, section) {
@@ -54,18 +74,6 @@ jQuery(document).ready(function($) {
         
         setHiddenFields();
         createQips();
-
-        $('#left_nav .share').zclip({
-            path: '/ZeroClipboard.swf',
-            copy: $('#left_nav .share').text(),
-            afterCopy:function(){
-                var link = $(this).text();
-                $(this).text('Copied to clipboard');
-                $(this).effect("highlight", {}, 3000, function() {
-                    $(this).text(link);
-                });
-            }
-        });
 
         $('.section_controls').show();
     }

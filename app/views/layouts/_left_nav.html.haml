@@ -40,8 +40,9 @@
 
     .share{:title => "Click to copy to clipboard"}= public_url(idea.token)
 
-  .nav_item
-    %div{:class => "ui-icon ui-icon-gear", }
-    %h5= link_to "Idea Settings", edit_idea_path(idea)
+  - if current_user.owns?(idea)
+    .nav_item
+      %div{:class => "ui-icon ui-icon-gear", }
+      %h5= link_to "Idea Settings", edit_idea_path(idea)
   
   

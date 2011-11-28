@@ -4,6 +4,12 @@ Hi,
 \
 = "#{@invite.idea.name}: #{@invite.idea.description}"
 \
+- unless @invite.message.blank?
+  and sent you this message:
+  \--------------------------------------------------------
+  = @invite.message     
+  \--------------------------------------------------------
+\
 To accept their invitation, please click on the following link:
 \
 = accept_invite_url(@invite.token)

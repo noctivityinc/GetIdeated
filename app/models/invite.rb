@@ -1,5 +1,5 @@
 class Invite < ActiveRecord::Base
-  attr_accessible :email, :user_id, :idea_id, :can_edit, :token, :expires_at
+  attr_accessible :email, :user_id, :idea_id, :can_edit, :token, :expires_at, :message
 
   before_create :set_token_and_expires
   after_create :send_invite
