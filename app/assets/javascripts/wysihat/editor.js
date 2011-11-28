@@ -33,11 +33,10 @@ WysiHat.Editor = {
         return $editArea;
     },
 
-    init: function($editArea) {
+    init: function($editArea, id) {
       jQuery.extend($editArea, WysiHat.Commands);
 
       // create hidden field
-      var id = $editArea.attr('data-field-name');
       var $hiddenField = jQuery('<input type="hidden"></input').attr('id', id).attr('name', id).val($editArea.html());
       $editArea.after($hiddenField);
 

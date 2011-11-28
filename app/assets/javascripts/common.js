@@ -17,11 +17,12 @@ jQuery(document).ready(function($) {
         e.preventDefault();
 
         var $section = $(this).closest('.section');
-        // var $editor = $section.find('.editor');
+        var $editor = $section.find('.editor');
 
-        // if ($editor.html().length === 0) { $editor.html('Click to edit this section'); }
-        reset($section);
-        $section.find('.editor_toolbar').remove().end().find('.section_content').show();
+        if ($editor.html().length === 0) { $editor.html('Click to edit this section'); }
+        $editor.removeClass('active');
+        $section.find('.editor_toolbar, .secondary').hide();
+        createQips();
 
         $section.find('.name a').focus().blur();
     });
@@ -85,7 +86,11 @@ jQuery(document).ready(function($) {
         $section.find('.secondary').hide();
 
         $section.find('form .editor').each(function() {
-            var editor = WysiHat.Editor.init($(this));
+            var $this = $(this);
+            var id = $this.attr('data-field-name');
+
+            $('#'+id).remove();
+            var editor = WysiHat.Editor.init($this, id);
             editor.removeClass('active');
 
             editor.click(function(e) {
