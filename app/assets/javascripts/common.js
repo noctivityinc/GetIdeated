@@ -17,9 +17,9 @@ jQuery(document).ready(function($) {
         e.preventDefault();
 
         var $section = $(this).closest('.section');
-        var $editor = $section.find('.editor');
+        // var $editor = $section.find('.editor');
 
-        if ($editor.html().length === 0) { $editor.html('Click to edit this section'); }
+        // if ($editor.html().length === 0) { $editor.html('Click to edit this section'); }
         reset($section);
         $section.find('.editor_toolbar').remove().end().find('.section_content').show();
 
