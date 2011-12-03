@@ -10,9 +10,26 @@
     -webkit-border-radius: 5px;
 }
 
-.rounded.red { border: 1px solid #e50000; }
-.rounded.purple { border: 1px solid #9400bf; }
-.rounded.green { border: 1px solid #58aa00; color: #58aa00; }
-.rounded.small { font-size: 75%; padding: 3px 7px; }
-.rounded.large { font-size: 125%; padding: 7px 12px; }
+.rounded.red {
+    border: 1px solid #e50000;
+}
+
+.rounded.purple {
+    border: 1px solid #9400bf;
+}
+
+.rounded.green {
+    border: 1px solid #58aa00;
+    color: #58aa00;
+}
+
+.rounded.small {
+    font-size: 75%;
+    padding: 3px 7px;
+}
+
+.rounded.large {
+    font-size: 125%;
+    padding: 7px 12px;
+}
 
