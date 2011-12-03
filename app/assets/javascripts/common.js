@@ -13,6 +13,8 @@ jQuery(document).ready(function($) {
         $(this).fadeOut();
     });
 
+    $('.editor').effect("highlight", {}, 1500)
+
     $('.section .cancel').live('click', function(e) {
         e.preventDefault();
 
