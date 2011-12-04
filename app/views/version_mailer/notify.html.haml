@@ -1,0 +1,23 @@
+- title @version.section.name
+- subtitle @version.section.idea.name
+
+%p
+  = "#{@member.user.name},"
+
+%div{:style => "margin-top: 20px"}
+  = "#{@version.user.name} just updated the #{@version.section.name} for #{@version.section.idea.name}"
+
+%div{:style => "margin: 40px 0px 30px 0px; border-top: 1px solid #C0C0C0; padding: 10px; border-bottom: 1px solid #C0C0C0; font-family: Courier, Arial"}
+  = @version.content.html_safe
+
+%div{:style => "margin-top: 20px"}
+  = "To view all versions for the #{@version.section.name}, visit the following URL:"
+%p
+  = link_to section_versions_url(@version.section), section_versions_url(@version.section)
+
+%div{:style => "margin: 50px 0px 40px 0px"}
+  Happy Ideating,
+
+%p
+  GetIdeating.com
+
