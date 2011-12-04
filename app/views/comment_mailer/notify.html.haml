@@ -1,0 +1,26 @@
+- title @commentable.name
+- subtitle @commentable.idea.name unless @is_idea
+
+%p
+  = "#{@member.user.name},"
+
+%div{:style => "margin-top: 20px"}
+  = "#{@comment.user.name} just posted a new comment about #{@is_idea ? @commentable.name : "the #{@commentable.name} of #{@commentable.idea.name}"}:"
+
+%div{:style => "margin: 40px 0px 30px 0px; border-top: 1px solid #C0C0C0; padding: 10px; border-bottom: 1px solid #C0C0C0; font-family: Courier, Arial"}
+  = @comment.content.html_safe
+
+%div{:style => "margin-top: 20px"}
+  To view all comments or reply, visit the following URL:
+%p
+  - if @is_idea
+    = link_to idea_sections_url(@commentable), idea_sections_url(@commentable)
+  - else
+    = link_to section_url(@commentable), section_url(@commentable)
+
+%div{:style => "margin: 50px 0px 40px 0px"}
+  Happy Ideating,
+
+%p
+  GetIdeating.com
+

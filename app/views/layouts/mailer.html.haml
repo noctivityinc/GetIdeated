@@ -1,0 +1,60 @@
+!!!
+%html
+
+  %head
+    %title
+      = "GetIdeated.com | Focus. Plan. Dream. Do."
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
+    %style{:type => "text/css"}
+      :sass
+        body
+          background: #363636
+          font-family: Helvetica, Arial, sans-serif
+
+          #header
+            overflow: hidden
+
+            .titles
+              float: left
+              color: white
+              padding-left: 15px
+              padding-top: 5px
+              width: 75%
+              display: inline-block
+
+              .title, .subtitle
+                margin: 0px
+                margin-right: 15px
+                display: inline-block
+
+            #logo
+              float: right
+              width: 120px
+              padding-right: 15px
+
+          #container
+            display: block
+            clear: both
+            width: 95%
+            margin: 10px auto
+            background: #FFF
+            -moz-box-shadow: 0 0 6px #b7b7b7
+            -webkit-box-shadow: 0 0 6px #b7b7b7
+            box-shadow: 0 0 6px #b7b7b7
+            padding: 10px
+
+
+  %body
+    #header
+      - if show_title? 
+        .titles
+          - if show_title?
+            %h1.title= yield(:title)
+
+          - if show_subtitle?
+            %h3.subtitle= yield(:subtitle)          
+
+      #logo= link_to image_tag("logo-bottom.png"), root_url, :id => "copyright-logo" 
+    #container
+      = yield
+

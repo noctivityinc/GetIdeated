@@ -1,5 +1,4 @@
-class UserMailer < ActionMailer::Base
-  default :from => "status@getideated.com"  
+class UserMailer < ApplicationMailer
   
   def welcome(user)  
     @user = user
